@@ -1,0 +1,20 @@
+<app-navbar></app-navbar>
+<div class="content">
+  <h1>Projects</h1>
+  <div class="card-container">
+    <ul>
+      @for (project of projects; track project.id){
+      <li>
+        <div class="card">
+          <a [routerLink]="['/projects', project.id]" class="card-title">{{ project.name }}</a>
+          <p>Description: {{ project.description }}</p>
+          <p>Start Date: {{ project.start_date }}</p>
+          <p>End Date: {{ project.end_date }}</p>
+          <p>Owner: {{ project.owner }}</p>
+          <button mat-button (click)="showTasks(project.id)">Show Tasks</button>
+        </div>
+      </li>
+      }
+    </ul>
+  </div>
+</div>

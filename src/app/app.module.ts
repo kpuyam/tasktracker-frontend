@@ -8,25 +8,25 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ProjectsComponent } from './projects/projects.component';
-import { ProjectDetailComponent } from './project-detail/project-detail.component';
-import { TasksComponent } from './tasks/tasks.component';
 import { LoginComponent } from './login/login.component';
 
+import { RouterModule, Routes } from '@angular/router';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 import { TokenInterceptor } from './token.interceptor';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MainModule } from './main/main.module';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProjectsComponent,
-    ProjectDetailComponent,
-    TasksComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +38,10 @@ import { TokenInterceptor } from './token.interceptor';
     MatInputModule,
     MatButtonModule,
     MatCardModule,
-    MatIconModule
+    MatIconModule,
+    MainModule,
+    MatToolbarModule,
+    MatTabsModule,
   ],
   providers: [
     AuthService,
@@ -47,7 +50,8 @@ import { TokenInterceptor } from './token.interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
-    }
+    },
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })

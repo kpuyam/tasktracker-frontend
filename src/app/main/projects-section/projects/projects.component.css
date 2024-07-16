@@ -1,0 +1,68 @@
+/* Reset some default styles for ul and li */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin: 10px 0;
+  width: 100%;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 90%;
+  max-width: 1200px;
+  padding: 20px;
+  margin: 10px 0;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #333;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  color: #333;
+  text-decoration: none;
+}
+
+.card-title:hover {
+  text-decoration: underline;
+}
+
+.card p {
+  margin: 5px 0;
+}
+
+.card button {
+  align-self: flex-end;
+  margin-top: 10px;
+}
+
+/* Style for the button using Angular Material */
+.mat-button {
+  background-color: #1976d2;
+  color: white;
+}
+
+.mat-button:hover {
+  background-color: #1565c0;
+}
