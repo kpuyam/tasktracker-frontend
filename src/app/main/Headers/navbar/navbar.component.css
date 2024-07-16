@@ -1,0 +1,8 @@
+.custom-toolbar {
+    background-color: #007FFF;
+    color: white; /* Ensure text is visible */
+  }
+
+  .example-spacer {
+    flex: 1 1 auto;
+  }

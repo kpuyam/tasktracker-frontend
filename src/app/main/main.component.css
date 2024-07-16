@@ -1,0 +1,18 @@
+.tile-1-2 {
+    background: lightgray; /* Optional: set background color */
+  }
+
+  .tile-3 {
+    background: lightblue; /* Optional: set background color */
+  }
+
+  .tile-4 {
+    background: lightgreen; /* Optional: set background color */
+  }
+
+  .full-width-component {
+    height: 100%;
+    width: 100%;
+  }
+
+
