@@ -8,7 +8,9 @@ import { catchError, tap } from 'rxjs/operators';
 })
 export class AuthService {
   private apiUrl = 'http://127.0.0.1:8000/api/token/';
+  private refreshTokenUrl = 'http://127.0.0.1:8000/api/token/refresh/';
   private tokenKey = 'auth_token';
+  private refreshTokenKey = 'refresh_token';
 
   constructor(private http: HttpClient) { }
 
@@ -16,6 +18,7 @@ export class AuthService {
     return this.http.post<any>(this.apiUrl, { username, password }).pipe(
       tap(response => {
         localStorage.setItem(this.tokenKey, response.access);
+        localStorage.setItem(this.refreshTokenKey, response.refresh);
       }),
       catchError(this.handleError)
     );
@@ -23,6 +26,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem(this.tokenKey);
+    localStorage.removeItem(this.refreshTokenKey);
   }
 
   isLoggedIn(): boolean {
@@ -35,5 +39,18 @@ export class AuthService {
 
   getToken(): string {
     return localStorage.getItem(this.tokenKey) || '';
+  }
+
+  getRefreshToken(): string {
+    return localStorage.getItem(this.refreshTokenKey) || '';
+  }
+
+  refreshToken(): Observable<any> {
+    return this.http.post<any>(this.refreshTokenUrl, { refresh: this.getRefreshToken() }).pipe(
+      tap(response => {
+        localStorage.setItem(this.tokenKey, response.access);
+      }),
+      catchError(this.handleError)
+    );
   }
 }
