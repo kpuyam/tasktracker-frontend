@@ -5,8 +5,8 @@ import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
-  templateUrl: 'login.component.html',
-  styleUrls: ['login.component.css']
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
   loginForm: FormGroup;
@@ -24,12 +24,18 @@ export class LoginComponent {
       const { username, password } = this.loginForm.value;
       this.authService.login(username, password).subscribe(
         () => {
-          this.router.navigate(['/home']);
+          this.router.navigate(['/home']).then(() => {
+            window.location.reload();
+          });
         },
         () => {
           this.loginForm.setErrors({ 'invalidLogin': true });
         }
       );
     }
+  }
+
+  togglePasswordVisibility(): void {
+    this.hide = !this.hide;
   }
 }
