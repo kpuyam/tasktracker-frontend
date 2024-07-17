@@ -10,10 +10,6 @@ import { MainComponent } from './main/main.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'home', component: MainComponent, canActivate: [AuthGuard] },
-  { path: 'projects', component: ProjectsComponent, canActivate: [AuthGuard] },
-  { path: 'projects/:id', component: ProjectDetailComponent, canActivate: [AuthGuard] },
-  { path: 'projects/:id/tasks', component: TasksComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
