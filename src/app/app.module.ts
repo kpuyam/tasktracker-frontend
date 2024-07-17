@@ -10,8 +10,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatTabsModule } from '@angular/material/tabs';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +19,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 import { TokenInterceptor } from './token.interceptor';
+import { TokenRefreshInterceptor } from './token-refresh.interceptor';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MainModule } from './main/main.module';
 
@@ -51,6 +50,11 @@ import { MainModule } from './main/main.module';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenRefreshInterceptor,
       multi: true
     },
     provideAnimationsAsync()
