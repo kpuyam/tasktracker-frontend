@@ -13,22 +13,37 @@ import { ApiService } from '../api.service';
 import { NavbarComponent } from './Headers/navbar/navbar.component';
 import { TasksHomeComponent } from './homepage/tasks-home/tasks-home.component';
 import { TasksComponent } from './projects-section/tasks/tasks.component';
-import { ProjectsComponent } from './projects-section/projects/projects.component';
 import { ProjectDetailComponent } from './projects-section/project-detail/project-detail.component';
+import { ProjectsComponent } from './projects-section/projects/projects.component';
+import { HomepageComponent } from './homepage/homepage.component';
+import { AuthGuard } from '../auth.guard';
 
 const routes: Routes = [
-  {path: 'main', component: MainComponent}
-];
+    {
+      path: '',
+      component: MainComponent,
+      canActivate: [AuthGuard],
+      children: [
+        { path: 'home', component: HomepageComponent },
+        { path: 'projects', component: ProjectsComponent },
+        { path: 'projects/:id', component: ProjectDetailComponent },
+        { path: 'projects/:id/tasks', component: TasksComponent },
+        { path: '', redirectTo: 'home', pathMatch: 'full' },
+      ]
+    }
+  ];
 @NgModule({
   declarations: [
     MainComponent,
     DashboardComponent,
     TeammatesComponent,
-    TasksHomeComponent,
+    TasksComponent,
     TasksComponent,
     NavbarComponent,
     ProjectsComponent,
     ProjectDetailComponent,
+    TasksHomeComponent,
+    HomepageComponent,
   ],
   imports: [
     CommonModule,
@@ -37,7 +52,7 @@ const routes: Routes = [
     MatToolbarModule,
     MatGridListModule,
     MatCardModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
   ],
   exports:[
     RouterModule
