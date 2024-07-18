@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +11,16 @@ export class AuthService {
   private apiUrl = 'http://127.0.0.1:8000/api/token/';
   private refreshTokenUrl = 'http://127.0.0.1:8000/api/token/refresh/';
   private signupUrl = 'http://127.0.0.1:8000/api/signup/';
+  
+  private baseUrl = 'http://127.0.0.1:8000/api/';
+  
+
   private tokenKey = 'auth_token';
   private refreshTokenKey = 'refresh_token';
 
-  constructor(private http: HttpClient) { }
+  
+
+  constructor(private http: HttpClient, private router: Router) { }
 
   login(username: string, password: string): Observable<any> {
     return this.http.post<any>(this.apiUrl, { username, password }).pipe(
@@ -25,11 +32,8 @@ export class AuthService {
     );
   }
 
-  signup(username: string, password: string): Observable<any> {
-    return this.http.post<any>(this.signupUrl, { username, password }).pipe(
-      tap(response => {
-        // Handle any response data if needed
-      }),
+  signup(user: any): Observable<any> {
+    return this.http.post(`${this.signupUrl}`, user).pipe(
       catchError(this.handleError)
     );
   }
@@ -37,6 +41,9 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem(this.tokenKey);
     localStorage.removeItem(this.refreshTokenKey);
+    this.router.navigate(['/login']).then(() => {
+      window.location.reload();
+    });
   }
 
   isLoggedIn(): boolean {
@@ -63,4 +70,19 @@ export class AuthService {
       catchError(this.handleError)
     );
   }
+
+  // getUserDetails(): Observable<any> {
+  //   const headers = new HttpHeaders({
+  //     'Authorization': `Bearer ${this.getToken()}`
+  //   });
+
+  //   return this.http.get<any>(this.userDetailsUrl, { headers }).pipe(
+  //     tap(response => {
+  //       this.user = response;
+  //     }),
+  //     catchError(this.handleError)
+  //   );
+  // }
+
+  
 }

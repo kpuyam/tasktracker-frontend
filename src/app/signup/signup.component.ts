@@ -12,45 +12,48 @@ export class SignupComponent {
   signupForm: FormGroup;
   hide = true;
   hideConfirm = true;
-  signupError = '';
+  accountCreated = false;
 
-  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) 
+  
+  {
     this.signupForm = this.fb.group({
       username: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required]
-    });
+    }, { validators: this.passwordMatchValidator });
+  }
+
+  passwordMatchValidator(form: FormGroup) {
+    return form.get('password')!.value === form.get('confirmPassword')!.value
+      ? null : { 'passwordMismatch': true };
   }
 
   onSubmit(): void {
-    const { username, password, confirmPassword } = this.signupForm.value;
-    if (password !== confirmPassword) {
-      this.signupError = 'Passwords do not match';
-    } else {
-      this.authService.signup(username, password).subscribe(
-        () => {
-          this.router.navigate(['/login']);
+    const { username, firstName, lastName, email, password } = this.signupForm.value;
+
+      this.authService.signup({ username, 
+        first_name: firstName, 
+        last_name: lastName,
+        email, 
+        password }).subscribe(
+        response => {
+          this.accountCreated = true;
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 2000);
         },
         error => {
-          if (error.status === 400 && error.error.username) {
-            this.signupError = 'Error creating user. Please try again later.';
-          } else {
-            this.signupError = `Username already exists`;
-          }
+            console.error('Error creating account', error);
         }
       );
     }
-  }
-
-  togglePasswordVisibility(): void {
-    this.hide = !this.hide;
-  }
-
-  toggleConfirmPasswordVisibility(): void {
-    this.hideConfirm = !this.hideConfirm;
-  }
-
-  navigateToLogin(): void {
-    this.router.navigate(['/login']);
-  }
+    
 }
