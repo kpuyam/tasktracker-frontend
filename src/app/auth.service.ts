@@ -9,6 +9,7 @@ import { catchError, tap } from 'rxjs/operators';
 export class AuthService {
   private apiUrl = 'http://127.0.0.1:8000/api/token/';
   private refreshTokenUrl = 'http://127.0.0.1:8000/api/token/refresh/';
+  private signupUrl = 'http://127.0.0.1:8000/api/signup/';
   private tokenKey = 'auth_token';
   private refreshTokenKey = 'refresh_token';
 
@@ -24,6 +25,15 @@ export class AuthService {
     );
   }
 
+  signup(username: string, password: string): Observable<any> {
+    return this.http.post<any>(this.signupUrl, { username, password }).pipe(
+      tap(response => {
+        // Handle any response data if needed
+      }),
+      catchError(this.handleError)
+    );
+  }
+
   logout(): void {
     localStorage.removeItem(this.tokenKey);
     localStorage.removeItem(this.refreshTokenKey);
@@ -34,7 +44,7 @@ export class AuthService {
   }
 
   private handleError(error: any): Observable<never> {
-    return throwError('Invalid username or password');
+    return throwError(error.message || 'Error occurred');
   }
 
   getToken(): string {
