@@ -38,4 +38,10 @@ export class LoginComponent {
   togglePasswordVisibility(): void {
     this.hide = !this.hide;
   }
+
+  navigateToSignup(): void {
+    this.router.navigate(['/signup']).then(() => {
+      window.location.reload();
+    });
+  }
 }

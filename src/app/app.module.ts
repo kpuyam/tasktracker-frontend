@@ -22,12 +22,14 @@ import { TokenInterceptor } from './token.interceptor';
 import { TokenRefreshInterceptor } from './token-refresh.interceptor';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MainModule } from './main/main.module';
+import { SignupComponent } from './signup/signup.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,
