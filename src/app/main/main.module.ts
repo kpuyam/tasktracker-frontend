@@ -17,6 +17,8 @@ import { ProjectDetailComponent } from './projects-section/project-detail/projec
 import { ProjectsComponent } from './projects-section/projects/projects.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { AuthGuard } from '../auth.guard';
+import { AuthService } from '../auth.service';
+import { MatMenuModule } from '@angular/material/menu';
 
 const routes: Routes = [
     {
@@ -53,12 +55,13 @@ const routes: Routes = [
     MatGridListModule,
     MatCardModule,
     RouterModule.forChild(routes),
+    MatMenuModule,
   ],
   exports:[
     RouterModule
   ],
   providers:[
-    ApiService
+    ApiService, AuthGuard,AuthService
   ]
 })
 export class MainModule { }

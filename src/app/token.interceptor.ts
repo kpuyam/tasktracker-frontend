@@ -10,6 +10,10 @@ export class TokenInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = this.authService.getToken();
 
+    if (request.url.endsWith('/api/signup/') || request.url.endsWith('/api/token/')) {
+      return next.handle(request);
+    }
+
     if (token) {
       request = request.clone({
         setHeaders: {
