@@ -29,14 +29,13 @@ export class SignupComponent {
     } else {
       this.authService.signup(username, password).subscribe(
         () => {
-          alert('User created successfully! Please login.');
           this.router.navigate(['/login']);
         },
         error => {
           if (error.status === 400 && error.error.username) {
-            this.signupError = `Username '${username}' already exists`;
-          } else {
             this.signupError = 'Error creating user. Please try again later.';
+          } else {
+            this.signupError = `Username already exists`;
           }
         }
       );
