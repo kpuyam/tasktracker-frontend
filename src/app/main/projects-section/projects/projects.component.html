@@ -11,7 +11,7 @@
           <p>Description: {{ project.description }}</p>
           <p>Start Date: {{ project.start_date }}</p>
           <p>End Date: {{ project.end_date }}</p>
-          <p>Owner: {{ project.owner }}</p>
+          <p>Owner: {{ getUserName(project.owner) }}</p>
           <button mat-button (click)="showTasks(project.id)">Show Tasks</button>
         </div>
       </li>
