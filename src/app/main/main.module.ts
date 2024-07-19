@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MainComponent } from './main.component';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './homepage/dashboard/dashboard.component';
@@ -9,6 +10,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { ApiService } from '../api.service';
 import { NavbarComponent } from './Headers/navbar/navbar.component';
 import { TasksHomeComponent } from './homepage/tasks-home/tasks-home.component';
@@ -19,6 +25,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { AuthGuard } from '../auth.guard';
 import { AuthService } from '../auth.service';
 import { MatMenuModule } from '@angular/material/menu';
+import { NewProjectComponent } from './projects-section/new-project/new-project.component';
 
 const routes: Routes = [
     {
@@ -30,6 +37,7 @@ const routes: Routes = [
         { path: 'projects', component: ProjectsComponent },
         { path: 'projects/:id', component: ProjectDetailComponent },
         { path: 'projects/:id/tasks', component: TasksComponent },
+        { path: 'new-project', component: NewProjectComponent },
         { path: '', redirectTo: 'home', pathMatch: 'full' },
       ]
     }
@@ -46,22 +54,31 @@ const routes: Routes = [
     ProjectDetailComponent,
     TasksHomeComponent,
     HomepageComponent,
+    NewProjectComponent,
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     MatIconModule,
     MatButtonModule,
     MatToolbarModule,
     MatGridListModule,
     MatCardModule,
-    RouterModule.forChild(routes),
     MatMenuModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    RouterModule.forChild(routes),
   ],
   exports:[
     RouterModule
   ],
   providers:[
-    ApiService, AuthGuard,AuthService
+    ApiService, AuthGuard, AuthService
   ]
 })
 export class MainModule { }
