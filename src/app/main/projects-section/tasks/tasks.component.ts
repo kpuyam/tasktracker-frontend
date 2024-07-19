@@ -10,6 +10,7 @@ import { ApiService } from '../../../api.service';
 export class TasksComponent implements OnInit {
   project: any;
   tasks: any[] = [];
+  users: any = {};
 
   constructor(private route: ActivatedRoute, private apiService: ApiService) { }
 
@@ -23,5 +24,20 @@ export class TasksComponent implements OnInit {
     this.apiService.getTasks(projectId).subscribe((data: any[]) => {
       this.tasks = data;
     });
+
+    this.apiService.getUsers().subscribe((users: any[]) => {
+      this.users = users.reduce((acc, user) => {
+        acc[user.id] = user.username;
+        return acc;
+      }, {});
+    });
+  }
+
+  getUserName(userId: number): string {
+    return this.users[userId] || 'Unknown';
+  }
+
+  trackById(index: number, item: any): number {
+    return item.id;
   }
 }

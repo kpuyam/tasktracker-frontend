@@ -3,15 +3,13 @@
 </div>
 <div class="card-container">
   <ul>
-    @for (task of tasks; track task.id){
-      <li>
-        <a href="/task/{{ task.id }}" class="card">
-          <p>Description: {{ task.description }}</p>
-          <p>Due Date: {{ task.due_date }}</p>
-          <p>Status: {{ task.status }}</p>
-          <p>Owner: {{ task.owner }}</p>
-        </a>
-      </li>
-    }
+    <li *ngFor="let task of tasks; trackBy: trackById">
+      <a [routerLink]="['/task', task.id]" class="card">
+        <p>Description: {{ task.description }}</p>
+        <p>Due Date: {{ task.due_date }}</p>
+        <p>Status: {{ task.status }}</p>
+        <p>Owner: {{ getUserName(task.owner) }}</p>
+      </a>
+    </li>
   </ul>
 </div>
