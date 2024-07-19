@@ -8,12 +8,18 @@ import { ApiService } from '../../../api.service';
   styleUrls: ['./tasks.component.css']
 })
 export class TasksComponent implements OnInit {
+  project: any;
   tasks: any[] = [];
 
   constructor(private route: ActivatedRoute, private apiService: ApiService) { }
 
   ngOnInit(): void {
-    const projectId = +this.route.snapshot.paramMap.get('id')!;
+    const projectId = Number(this.route.snapshot.paramMap.get('id'));
+
+    this.apiService.getProject(projectId).subscribe((project: any) => {
+      this.project = project;
+    });
+
     this.apiService.getTasks(projectId).subscribe((data: any[]) => {
       this.tasks = data;
     });

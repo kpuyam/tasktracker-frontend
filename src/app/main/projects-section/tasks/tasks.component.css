@@ -8,6 +8,10 @@ ul {
     margin: 10px 0;
   }
 
+  .project-name h4 {
+    padding: 10px 0 0 10px;  /* top | right | bottom | left */
+  }
+
   .card-container {
     display: flex;
     flex-wrap: wrap;
