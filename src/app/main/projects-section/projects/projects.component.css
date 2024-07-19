@@ -66,3 +66,21 @@ li {
 .mat-button:hover {
   background-color: #1565c0;
 }
+
+/* Styles for the container and title */
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.title {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.new-project-button {
+  margin-left: auto;
+}

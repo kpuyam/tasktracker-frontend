@@ -21,4 +21,12 @@ export class ProjectsComponent implements OnInit {
   showTasks(projectId: number): void {
     this.router.navigate([`/projects/${projectId}/tasks`]);
   }
+
+  trackByProjectId(index: number, project: any): number {
+    return project.id;
+  }
+
+  navigateToAddProject(): void {
+    this.router.navigate(['/new-project']);
+  }
 }
