@@ -29,4 +29,12 @@ export class ApiService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('auth_token')}`);
     return this.http.get<any>(`${this.baseUrl}/user_details/`, { headers });
   }
+
+  createProject(projectData: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/projects/`, projectData);
+  }
+
+  getUsers(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/users`);
+  }
 }
