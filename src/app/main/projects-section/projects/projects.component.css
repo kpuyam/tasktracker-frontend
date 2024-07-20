@@ -14,6 +14,8 @@ li {
   flex-direction: column;
   align-items: center;
   width: 100%;
+  overflow: hidden;
+  perspective: 1000px;
 }
 
 .card {
@@ -31,39 +33,56 @@ li {
   color: #333;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
+  animation: float 3s infinite ease-in-out;
+  transform-style: preserve-3d;
+  perspective: 1000px;
 }
 
 .card:hover {
+  transform: translateY(-15px) rotateY(10deg) rotateX(10deg);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .card-title {
-  font-size: 1.5em;
+  font-size: 2em;
   margin-bottom: 10px;
   color: #333;
   text-decoration: none;
+  background: linear-gradient(90deg, #ff758c, #ff7eb3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: color 0.3s ease;
 }
 
 .card-title:hover {
+  color: #b67eff;
   text-decoration: underline;
 }
 
 .card p {
   margin: 5px 0;
+  font-size: 1.1em;
+  color: #666;
 }
 
 .card button {
   align-self: flex-end;
   margin-top: 10px;
+  background-color: #1976d2;
+  color: white;
+  transition: background-color 0.3s ease;
 }
 
 /* Style for the button using Angular Material */
 .mat-button {
   background-color: #1976d2;
-  color: white;
+
 }
 
 .mat-button:hover {
+  background-color: #1565c0;
+}
+.card button:hover {
   background-color: #1565c0;
 }
 
@@ -72,15 +91,47 @@ li {
   display: flex;
   flex-direction: column;
   padding: 20px;
+  background: linear-gradient(135deg, #ece9e6, #ffffff);
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+
+.card button:hover {
+  background-color: #1565c0;
+}
+
+/* Styles for the container and title */
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background: linear-gradient(135deg, #ece9e6, #ffffff);
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
 .title {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between; /* Adjusted for better spacing */
   align-items: center;
   margin-bottom: 20px;
+  width: 100%; /* Expand to full width */
+  max-width: 1800px; /* Increased max width */
 }
 
 .new-project-button {
   margin-left: auto;
+  padding: 10px 20px; /* Added padding for larger button */
+  font-size: 1.2em; /* Increased font size */
+}
+
+/* Keyframes for the floating effect */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }

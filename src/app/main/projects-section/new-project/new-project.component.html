@@ -1,42 +1,38 @@
 <div class="new-project-container">
   <mat-card>
-    <mat-card-content>
-      <h4>Create New Project</h4>
-      <form [formGroup]="newProjectForm" (ngSubmit)="onSubmit()">
-        <mat-form-field appearance="fill" class="full-width">
-          <mat-label>Name</mat-label>
-          <input matInput formControlName="name" required>
-        </mat-form-field>
-        <mat-form-field appearance="fill" class="full-width">
-          <mat-label>Description</mat-label>
-          <textarea matInput formControlName="description" rows="3" required></textarea>
-        </mat-form-field>
-        <div class="date-range">
-          <mat-form-field appearance="fill" class="start-date">
-            <mat-label>Start Date</mat-label>
-            <input matInput [matDatepicker]="picker1" formControlName="start_date" required>
-            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-            <mat-datepicker #picker1></mat-datepicker>
-          </mat-form-field>
-          <mat-form-field appearance="fill" class="end-date">
-            <mat-label>End Date</mat-label>
-            <input matInput [matDatepicker]="picker2" formControlName="end_date" required>
-            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-            <mat-datepicker #picker2></mat-datepicker>
-          </mat-form-field>
-        </div>
-        <mat-form-field appearance="fill" class="full-width">
-          <mat-label>Owner</mat-label>
-          <mat-select formControlName="owner" required>
-            <mat-option *ngFor="let user of users" [value]="user.id">
-              {{ user.username }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <div class="button-group">
-          <button mat-raised-button color="primary" type="submit" class="custom-button">Create Project</button>
-        </div>
-      </form>
-    </mat-card-content>
+      <mat-card-content>
+          <h4>Create New Project</h4>
+          <form [formGroup]="newProjectForm" (ngSubmit)="onSubmit()">
+              <mat-form-field appearance="fill" class="full-width">
+                  <mat-label>Name</mat-label>
+                  <input matInput formControlName="name" required>
+              </mat-form-field>
+              <mat-form-field appearance="fill" class="full-width">
+                  <mat-label>Description</mat-label>
+                  <textarea matInput formControlName="description" rows="3" required></textarea>
+              </mat-form-field>
+              <div class="date-range">
+                  <mat-form-field appearance="fill" class="start-date">
+                      <mat-label>Start Date</mat-label>
+                      <input matInput type="date" formControlName="start_date" required>
+                  </mat-form-field>
+                  <mat-form-field appearance="fill" class="end-date">
+                      <mat-label>End Date</mat-label>
+                      <input matInput type="date" formControlName="end_date" required>
+                  </mat-form-field>
+              </div>
+              <mat-form-field appearance="fill" class="full-width">
+                  <mat-label>Owner</mat-label>
+                  <select matNativeControl formControlName="owner" required>
+                      <option *ngFor="let user of users" [value]="user.id">
+                          {{ user.username }}
+                      </option>
+                  </select>
+              </mat-form-field>
+              <div class="button-group">
+                  <button mat-raised-button color="primary" type="submit" class="custom-button">Create Project</button>
+              </div>
+          </form>
+      </mat-card-content>
   </mat-card>
 </div>
