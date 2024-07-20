@@ -17,9 +17,6 @@ export class NavbarComponent {
       (user: any) => {
         this.user = user;
       },
-      error => {
-        console.error('Failed to fetch user details:', error);
-      }
     );
   }
 

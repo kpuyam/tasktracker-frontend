@@ -13,6 +13,7 @@ export class AuthService {
   private signupUrl = 'http://127.0.0.1:8000/api/signup/';
   private baseUrl = 'http://127.0.0.1:8000/api/';
   private usersUrl = 'http://127.0.0.1:8000/api/users/';
+  
   private tokenKey = 'auth_token';
   private refreshTokenKey = 'refresh_token';
 
@@ -65,17 +66,5 @@ export class AuthService {
       }),
       catchError(this.handleError)
     );
-  }
-  // getUserDetails(): Observable<any> {
-  //   const headers = new HttpHeaders({
-  //     'Authorization': `Bearer ${this.getToken()}`
-  //   });
-
-  //   return this.http.get<any>(this.userDetailsUrl, { headers }).pipe(
-  //     tap(response => {
-  //       this.user = response;
-  //     }),
-  //     catchError(this.handleError)
-  //   );
-  // }
+  } 
 }
