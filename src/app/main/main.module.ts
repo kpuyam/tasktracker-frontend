@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, ViewportScroller } from '@angular/common';
 import { MainComponent } from './main.component';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './homepage/dashboard/dashboard.component';
 import { TeammatesComponent } from './homepage/teammates/teammates.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -19,6 +18,14 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { AuthGuard } from '../auth.guard';
 import { AuthService } from '../auth.service';
 import { MatMenuModule } from '@angular/material/menu';
+import { DashboardComponent } from './homepage/dashboard/dashboard.component'; 
+import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NewProjectComponent } from './projects-section/new-project/new-project.component';
+import { MatNativeDateModule, MatOption } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 
 const routes: Routes = [
     {
@@ -26,10 +33,11 @@ const routes: Routes = [
       component: MainComponent,
       canActivate: [AuthGuard],
       children: [
-        { path: 'home', component: HomepageComponent },
+        { path: 'home', component: HomepageComponent }, 
         { path: 'projects', component: ProjectsComponent },
         { path: 'projects/:id', component: ProjectDetailComponent },
         { path: 'projects/:id/tasks', component: TasksComponent },
+        { path: 'new-project', component: NewProjectComponent },
         { path: '', redirectTo: 'home', pathMatch: 'full' },
       ]
     }
@@ -46,8 +54,11 @@ const routes: Routes = [
     ProjectDetailComponent,
     TasksHomeComponent,
     HomepageComponent,
+    NewProjectComponent,
+    
   ],
   imports: [
+    FormsModule,
     CommonModule,
     MatIconModule,
     MatButtonModule,
@@ -56,6 +67,13 @@ const routes: Routes = [
     MatCardModule,
     RouterModule.forChild(routes),
     MatMenuModule,
+    CarouselModule.forRoot(),
+    MatOption,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatNativeDateModule,
+    RouterModule.forChild(routes)
   ],
   exports:[
     RouterModule

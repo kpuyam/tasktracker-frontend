@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class AuthService {
   private refreshTokenUrl = 'http://127.0.0.1:8000/api/token/refresh/';
   private signupUrl = 'http://127.0.0.1:8000/api/signup/';
   
-  private baseUrl = 'http://127.0.0.1:8000/api/';
+  // private baseUrl = 'http://127.0.0.1:8000/api/';
   
 
   private tokenKey = 'auth_token';
@@ -70,19 +71,5 @@ export class AuthService {
       catchError(this.handleError)
     );
   }
-
-  // getUserDetails(): Observable<any> {
-  //   const headers = new HttpHeaders({
-  //     'Authorization': `Bearer ${this.getToken()}`
-  //   });
-
-  //   return this.http.get<any>(this.userDetailsUrl, { headers }).pipe(
-  //     tap(response => {
-  //       this.user = response;
-  //     }),
-  //     catchError(this.handleError)
-  //   );
-  // }
-
-  
+ 
 }

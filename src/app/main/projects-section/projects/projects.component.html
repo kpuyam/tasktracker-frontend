@@ -1,19 +1,20 @@
 <div class="content">
-  <h1>Projects</h1>
+  <div class="title">
+    <h4>Projects</h4>
+    <button mat-raised-button color="primary" class="new-project-button" (click)="navigateToAddProject()">+ New Project</button>
+  </div>
   <div class="card-container">
     <ul>
-      @for (project of projects; track project.id){
-      <li>
+      <li *ngFor="let project of projects; trackBy: trackByProjectId">
         <div class="card">
           <a [routerLink]="['/projects', project.id]" class="card-title">{{ project.name }}</a>
           <p>Description: {{ project.description }}</p>
           <p>Start Date: {{ project.start_date }}</p>
           <p>End Date: {{ project.end_date }}</p>
-          <p>Owner: {{ project.owner }}</p>
+          <p>Owner: {{ getUserName(project.owner) }}</p>
           <button mat-button (click)="showTasks(project.id)">Show Tasks</button>
         </div>
       </li>
-      }
     </ul>
   </div>
 </div>
