@@ -16,6 +16,7 @@ export class NavbarComponent {
     this.apiservice.getUserDetails().subscribe(
       (user: any) => {
         this.user = user;
+        console.log(this.user);
       },
       error => {
         console.error('Failed to fetch user details:', error);

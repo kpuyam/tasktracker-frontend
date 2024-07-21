@@ -26,6 +26,12 @@ import { AuthGuard } from '../auth.guard';
 import { AuthService } from '../auth.service';
 import { MatMenuModule } from '@angular/material/menu';
 import { NewProjectComponent } from './projects-section/new-project/new-project.component';
+import { CarouselModule } from 'primeng/carousel';
+import { ProjectCarouselComponent } from './homepage/dashboard/project-carousel/project-carousel.component';
+import { YourTaskPageComponent } from './your-task-page/your-task-page.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { AddTaskComponent } from './your-task-page/add-task/add-task.component';
+import { DialogModule } from '@angular/cdk/dialog';
 
 const routes: Routes = [
     {
@@ -38,6 +44,7 @@ const routes: Routes = [
         { path: 'projects/:id', component: ProjectDetailComponent },
         { path: 'projects/:id/tasks', component: TasksComponent },
         { path: 'new-project', component: NewProjectComponent },
+        { path: 'yourtask', component:  YourTaskPageComponent},
         { path: '', redirectTo: 'home', pathMatch: 'full' },
       ]
     }
@@ -55,6 +62,9 @@ const routes: Routes = [
     TasksHomeComponent,
     HomepageComponent,
     NewProjectComponent,
+    ProjectCarouselComponent,
+    YourTaskPageComponent,
+    AddTaskComponent,
   ],
   imports: [
     CommonModule,
@@ -72,6 +82,9 @@ const routes: Routes = [
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    CarouselModule,
+    MatTabsModule,
+    DialogModule,
     RouterModule.forChild(routes),
   ],
   exports:[

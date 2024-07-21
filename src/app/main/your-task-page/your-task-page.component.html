@@ -1,0 +1,34 @@
+<button mat-raised-button color="primary" class="new-Task-button" (click)="openDialog()">+ New Task</button>
+<mat-tab-group>
+
+  <mat-tab label="Pending">
+    <div class="task-container">
+      <mat-card *ngFor="let task of pendingTasks" class="task-card">
+        <mat-card-header>
+          <mat-card-title>{{ task.description }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Due Date: {{ task.due_date }}</p>
+          <p>Status: {{ task.status }}</p>
+          <!-- Add other task details as needed -->
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Completed">
+    <div class="task-container">
+      <mat-card *ngFor="let task of completedTasks" class="task-card">
+        <mat-card-header>
+          <mat-card-title>{{ task.description }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Due Date: {{ task.due_date }}</p>
+          <p>Status: {{ task.status }}</p>
+          <!-- Add other task details as needed -->
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-tab>
+
+</mat-tab-group>
