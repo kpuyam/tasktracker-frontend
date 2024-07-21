@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders,HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Task } from './main/main.models';
+import { AuthService } from './auth.service';
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +13,7 @@ export class ApiService {
 
   private User: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   getProjects(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/projects/`);
@@ -27,7 +29,15 @@ export class ApiService {
 
   getUserDetails(): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('auth_token')}`);
-    return this.http.get<any>(`${this.baseUrl}/user_details`, { headers });
+    return this.http.get<any>(`${this.baseUrl}/user_details/`, { headers });
+  }
+
+  updateProject(projectId: number, project: any): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}/projects/${projectId}/`, project);
+  }
+
+  deleteProject(projectId: number): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}/projects/${projectId}/`);
   }
 
   createProject(projectData: any): Observable<any> {
@@ -41,13 +51,25 @@ export class ApiService {
     return this.http.get<any[]>(`${this.baseUrl}/users`);
   }
 
-  getTasksByStatus(status: string): Observable<Task[]> {
-    const params = new HttpParams().set('status', status);
-    return this.http.get<Task[]>(`${this.baseUrl}/tasks`, { params });
+  createTask(task: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/tasks/`, task);
   }
 
-  getTasksByStatusNotCompleted(): Observable<Task[]> {
-    const params = new HttpParams().set('status__not', 'completed');
-    return this.http.get<Task[]>(`${this.baseUrl}/tasks`, { params });
+  updateTask(taskId: number, task: any): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}/tasks/${taskId}/`, task);
   }
+
+  deleteTask(taskId: number): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}/tasks/${taskId}/`);
+  }
+
+  private getHeaders(): HttpHeaders {
+    const token = this.authService.getToken();
+    return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  }
+
+  getUsersByProject(projectId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/users_by_project/${projectId}`);
+  }
+
 }

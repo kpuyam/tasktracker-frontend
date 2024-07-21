@@ -1,7 +1,77 @@
-mat-card {
+/* dashboard.component.css */
+
+/* Container Styling */
+.projects-container {
   display: flex;
-  flex-direction: column;
-  margin: 5px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding: 20px;
+  background: linear-gradient(135deg, #e0eafc, #cfdef3);
+  gap: 20px;
+}
+
+/* Card Styling */
+.project-card {
+  flex: 0 0 auto;
+  width: 300px;
+  padding: 20px;
+  background: linear-gradient(135deg, #f8ffae, #43c6ac);
+  border: 2px solid transparent;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s, background 0.3s, border-color 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Active Card Styling */
+.project-card.active {
+  background: linear-gradient(135deg, #ffd3a5, #fd6585);
+  border-color: #ff6f61;
+}
+
+/* Card Hover Effect */
+.project-card:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #ffb3ba, #ffdfba);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Card Content */
+.project-card h4,
+.project-card p {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  color: #444;
+}
+
+/* Project Name Styling */
+.project-name {
+  cursor: pointer;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.project-name:hover {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* Button Styling */
+button.mat-button {
+  margin-top: 10px;
+  background: rgba(0, 0, 0, 0.1);
+  color: #fff;
+  border-radius: 5px;
+  padding: 5px 15px;
+  transition: background 0.3s;
+}
+
+button.mat-button:hover {
+  background: rgba(0, 0, 0, 0.3);
 }
 .full-width-component {
   height: 100%;

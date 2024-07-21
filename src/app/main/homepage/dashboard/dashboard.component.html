@@ -1,3 +1,21 @@
-<mat-card class="full-width-component">
-  <app-project-carousel></app-project-carousel>
+<!-- dashboard.component.html -->
+<mat-card class="full-width-card">
+  <mat-card-header>
+    <mat-card-title>DashBoard</mat-card-title>
+  </mat-card-header>
 </mat-card>
+
+<div class="projects-container">
+  <div class="project-card"
+    *ngFor="let project of projects"
+    [ngClass]="{ 'active': project.id === selectedProjectId }"
+  >
+    <h4 (click)="redirectToProjectDetails(project.id)" class="project-name">{{ project.name }}</h4>
+    <p>Description: {{ project.description }}</p>
+    <p>Start Date: {{ project.start_date }}</p>
+    <p>End Date: {{ project.end_date }}</p>
+    <p>Owner: {{ project.owner }}</p>
+    <button mat-button (click)="showTasks(project.id)" routerLinkActive="active-link">Show Tasks</button>
+    <button mat-button (click)="showTeammates(project.id)" routerLinkActive="active-link">Show Teammates</button>
+  </div>
+</div>

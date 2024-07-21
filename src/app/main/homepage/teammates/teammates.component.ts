@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-teammates',
@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrl: './teammates.component.css'
 })
 export class TeammatesComponent {
+
+  @Input() projectOwner: any;
+  @Input() teammates: any[] | null = null;
+
 
 }
