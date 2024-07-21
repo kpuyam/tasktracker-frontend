@@ -69,4 +69,8 @@ export class ApiService {
     return this.http.get<any[]>(`${this.baseUrl}/users_by_project/${projectId}`);
   }
 
+  getRoles(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/roles/`);
+  }
+
 }
