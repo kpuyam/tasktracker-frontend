@@ -73,4 +73,5 @@ th:last-child, td:last-child {
   width: 100px;
   height: 25px;
   line-height: 25px;
+  cursor: pointer;
 }
