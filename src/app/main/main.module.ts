@@ -27,11 +27,13 @@ import { AuthService } from '../auth.service';
 import { MatMenuModule } from '@angular/material/menu';
 import { NewProjectComponent } from './projects-section/new-project/new-project.component';
 import { CarouselModule } from 'primeng/carousel';
-import { ProjectCarouselComponent } from './homepage/dashboard/project-carousel/project-carousel.component';
 import { YourTaskPageComponent } from './your-task-page/your-task-page.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AddTaskComponent } from './your-task-page/add-task/add-task.component';
 import { DialogModule } from '@angular/cdk/dialog';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes: Routes = [
     {
@@ -62,7 +64,6 @@ const routes: Routes = [
     TasksHomeComponent,
     HomepageComponent,
     NewProjectComponent,
-    ProjectCarouselComponent,
     YourTaskPageComponent,
     AddTaskComponent,
   ],
@@ -85,6 +86,9 @@ const routes: Routes = [
     CarouselModule,
     MatTabsModule,
     DialogModule,
+    DragDropModule,
+    BrowserAnimationsModule,
+    BrowserModule,
     RouterModule.forChild(routes),
   ],
   exports:[

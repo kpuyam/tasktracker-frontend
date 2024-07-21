@@ -1,34 +1,83 @@
-<button mat-raised-button color="primary" class="new-Task-button" (click)="openDialog()">+ New Task</button>
-<mat-tab-group>
+<button mat-raised-button color="primary" class="new-task-button" (click)="openDialog()">+ New Task</button>
 
-  <mat-tab label="Pending">
-    <div class="task-container">
-      <mat-card *ngFor="let task of pendingTasks" class="task-card">
+<div class="task-columns" cdkDropListGroup>
+  <div class="task-column">
+    <h3>New</h3>
+    <div cdkDropList
+         id="newTasks"
+         class="task-list"
+         [cdkDropListData]="newTasks"
+         [cdkDropListConnectedTo]="allDropListsExcept('newTasks')"
+         (cdkDropListDropped)="dropMultiList($event)">
+      <mat-card *ngFor="let task of newTasks" class="task-card" cdkDrag>
         <mat-card-header>
           <mat-card-title>{{ task.description }}</mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <p>Due Date: {{ task.due_date }}</p>
           <p>Status: {{ task.status }}</p>
-          <!-- Add other task details as needed -->
         </mat-card-content>
       </mat-card>
     </div>
-  </mat-tab>
+  </div>
 
-  <mat-tab label="Completed">
-    <div class="task-container">
-      <mat-card *ngFor="let task of completedTasks" class="task-card">
+  <div class="task-column">
+    <h3>In Progress</h3>
+    <div cdkDropList
+         id="inProgressTasks"
+         class="task-list"
+         [cdkDropListData]="inProgressTasks"
+         [cdkDropListConnectedTo]="allDropListsExcept('inProgressTasks')"
+         (cdkDropListDropped)="dropMultiList($event)">
+      <mat-card *ngFor="let task of inProgressTasks" class="task-card" cdkDrag>
         <mat-card-header>
           <mat-card-title>{{ task.description }}</mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <p>Due Date: {{ task.due_date }}</p>
           <p>Status: {{ task.status }}</p>
-          <!-- Add other task details as needed -->
         </mat-card-content>
       </mat-card>
     </div>
-  </mat-tab>
+  </div>
 
-</mat-tab-group>
+  <div class="task-column">
+    <h3>Completed</h3>
+    <div cdkDropList
+         id="completedTasks"
+         class="task-list"
+         [cdkDropListData]="completedTasks"
+         [cdkDropListConnectedTo]="allDropListsExcept('completedTasks')"
+         (cdkDropListDropped)="dropMultiList($event)">
+      <mat-card *ngFor="let task of completedTasks" class="task-card" cdkDrag>
+        <mat-card-header>
+          <mat-card-title>{{ task.description }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Due Date: {{ task.due_date }}</p>
+          <p>Status: {{ task.status }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="task-column">
+    <h3>Accepted</h3>
+    <div cdkDropList
+         id="acceptedTasks"
+         class="task-list"
+         [cdkDropListData]="acceptedTasks"
+         [cdkDropListConnectedTo]="allDropListsExcept('acceptedTasks')"
+         (cdkDropListDropped)="dropMultiList($event)">
+      <mat-card *ngFor="let task of acceptedTasks" class="task-card" cdkDrag>
+        <mat-card-header>
+          <mat-card-title>{{ task.description }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Due Date: {{ task.due_date }}</p>
+          <p>Status: {{ task.status }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

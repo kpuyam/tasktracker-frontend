@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../../../api.service';
 import { Router } from '@angular/router';
 import { formatDate } from '@angular/common';
+import { MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-add-task',
   templateUrl: './add-task.component.html',
@@ -24,7 +25,7 @@ export class AddTaskComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private ApiService: ApiService,
-    private router:Router ,
+    private dialogRef: MatDialogRef<AddTaskComponent>,
   ) {
     this.newTaskForm = this.fb.group({
       project: ['', Validators.required],
@@ -42,13 +43,7 @@ export class AddTaskComponent implements OnInit {
       if (this.newTaskForm.value.due_date) {
         formattedTaskData.due_date = formatDate(this.newTaskForm.value.due_date, 'yyyy-MM-dd', 'en');
       }
-
-      this.ApiService.createTask(formattedTaskData).subscribe(
-        () => {
-          this.router.navigate(['/yourtask']);
-        },
-        error => console.error('Error creating task:', error)
-      );
+      this.dialogRef.close(formattedTaskData);
     }
   }
 

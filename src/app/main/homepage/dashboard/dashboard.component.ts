@@ -37,8 +37,9 @@ export class DashboardComponent {
   }
 
   showTasks(projectId: number): void {
+    console.log(projectId);
     this.selectedProjectId = projectId;
-    this.apiService.getTasks(projectId).subscribe((tasks: any[]) => {
+    this.apiService.getTask(projectId).subscribe((tasks: any[]) => {
       this.tasks.emit(tasks);
 
     });

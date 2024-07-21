@@ -1,61 +1,113 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../api.service';
 import { Task } from '../main.models';
 import { MatDialog } from '@angular/material/dialog';
 import { AddTaskComponent } from './add-task/add-task.component';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+
 @Component({
   selector: 'app-your-task-page',
   templateUrl: './your-task-page.component.html',
-  styleUrl: './your-task-page.component.css'
+  styleUrls: ['./your-task-page.component.css']
 })
-export class YourTaskPageComponent {
-  pendingTasks: Task[] = [];
+export class YourTaskPageComponent implements OnInit {
+  newTasks: Task[] = [];
+  inProgressTasks: Task[] = [];
   completedTasks: Task[] = [];
+  acceptedTasks: Task[] = [];
 
-  constructor(private apiService: ApiService,private  dialog:MatDialog) {}
+  constructor(private apiService: ApiService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.fetchPendingTasks();
-    this.fetchCompletedTasks();
-    console.log(this.pendingTasks);
-    console.log(this.completedTasks);
+    this.apiService.getTasks().subscribe((tasks: Task[]) => {
+      console.log(tasks);
+      this.newTasks = tasks.filter(task => task.status === 'new' || task.status === 'not_started');
+      this.inProgressTasks = tasks.filter(task => task.status === 'in-progress');
+      this.completedTasks = tasks.filter(task => task.status === 'completed');
+      this.acceptedTasks = tasks.filter(task => task.status === 'accepted');
+      console.log(this.newTasks);
+    });
+
+    this.fetchTasks();
   }
 
-  fetchPendingTasks(): void {
-    this.apiService.getTasksByStatusNotCompleted().subscribe(
+  fetchTasks(): void {
+
+    this.apiService.getTasks().subscribe(
       (tasks: Task[]) => {
-        this.pendingTasks = tasks;
-        console.log("hello",tasks);
+        console.log(tasks);
+        this.newTasks = tasks.filter(task => task.status === 'new' || task.status === 'not_started');
+        this.inProgressTasks = tasks.filter(task => task.status === 'in-progress');
+        this.completedTasks = tasks.filter(task => task.status === 'completed');
+        this.acceptedTasks = tasks.filter(task => task.status === 'accepted');
+        console.log(this.newTasks);
       },
       (error) => {
-        console.error('Error fetching pending tasks:', error);
+        console.error('Error fetching tasks:', error);
       }
     );
   }
 
-  fetchCompletedTasks(): void {
-    this.apiService.getTasksByStatus('completed').subscribe(
-      (tasks: Task[]) => {
-        this.completedTasks = tasks;
-        console.log("hello",tasks);
-      },
-      (error) => {
-        console.error('Error fetching completed tasks:', error);
-      }
-    );
-  }
   openDialog(): void {
     const dialogRef = this.dialog.open(AddTaskComponent, {
-      width: '600px', // Adjust width as needed
-      data: {} // You can pass data to the dialog if needed
+      width: '600px',
+      data: {}
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      // Handle dialog close if needed
+    dialogRef.afterClosed().subscribe(formattedTaskData => {
+      if (formattedTaskData) {
+        this.apiService.createTask(formattedTaskData).subscribe(
+          () => {
+          },
+          error => console.error('Error creating task:', error)
+        );
+        this.fetchTasks();
+      }
     });
   }
 
-  navigateToAddTask(): void {
-    // Implement navigation logic if needed
+  dropMultiList(event: CdkDragDrop<Task[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      console.log("HII");
+      const task = event.previousContainer.data[event.previousIndex];
+      task.status = this.getStatusForContainer(event.container.id);
+      console.log("HII",task);
+      this.apiService.updateTaskStatus(task).subscribe(
+        response => {
+          transferArrayItem(
+            event.previousContainer.data,
+            event.container.data,
+            event.previousIndex,
+            event.currentIndex
+          );
+          console.log('Task status updated successfully',response);
+          this.fetchTasks(); // Refresh tasks after update
+        },
+        error => {
+          console.error('Error updating task status:', error);
+        }
+      );
+    }
+  }
+
+  getStatusForContainer(containerId: string): string {
+    switch (containerId) {
+      case 'newTasks':
+        return 'new'; // 'new' status represents both 'new' and 'not_started'
+      case 'inProgressTasks':
+        return 'in-progress';
+      case 'completedTasks':
+        return 'completed';
+      case 'acceptedTasks':
+        return 'accepted';
+      default:
+        return '';
+    }
+  }
+
+  allDropListsExcept(currentListId: string): string[] {
+    return ['newTasks', 'inProgressTasks', 'completedTasks', 'acceptedTasks'].filter(id => id !== currentListId);
   }
 }

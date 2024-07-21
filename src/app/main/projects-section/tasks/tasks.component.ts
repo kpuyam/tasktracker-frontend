@@ -21,7 +21,7 @@ export class TasksComponent implements OnInit {
       this.project = project;
     });
 
-    this.apiService.getTasks(projectId).subscribe((data: any[]) => {
+    this.apiService.getTask(projectId).subscribe((data: any[]) => {
       this.tasks = data;
     });
 
