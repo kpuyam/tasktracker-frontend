@@ -7,7 +7,17 @@
     <ul>
       <li *ngFor="let project of projects; trackBy: trackByProjectId">
         <div class="card">
-          <a [routerLink]="['/projects', project.id]" class="card-title">{{ project.name }}</a>
+          <div class="card-header">
+            <a [routerLink]="['/projects', project.id]" class="card-title">{{ project.name }}</a>
+            <div class="card-actions" *ngIf="isAdmin">
+              <button mat-icon-button (click)="editProject(project.id)" class="icon-button">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button (click)="deleteProject(project.id)" class="icon-button">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
           <p>Description: {{ project.description }}</p>
           <p>Start Date: {{ project.start_date }}</p>
           <p>End Date: {{ project.end_date }}</p>

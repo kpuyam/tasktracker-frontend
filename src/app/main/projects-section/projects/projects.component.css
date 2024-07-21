@@ -14,14 +14,12 @@ li {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  overflow: hidden;
-  perspective: 1000px;
 }
 
 .card {
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: flex-start;
   width: 90%;
   max-width: 1200px;
   padding: 20px;
@@ -33,19 +31,21 @@ li {
   color: #333;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
-  animation: float 3s infinite ease-in-out;
-  transform-style: preserve-3d;
-  perspective: 1000px;
 }
 
 .card:hover {
-  transform: translateY(-15px) rotateY(10deg) rotateX(10deg);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .card-title {
   font-size: 2em;
-  margin-bottom: 10px;
   color: #333;
   text-decoration: none;
   background: linear-gradient(90deg, #ff758c, #ff7eb3);
@@ -57,6 +57,15 @@ li {
 .card-title:hover {
   color: #b67eff;
   text-decoration: underline;
+}
+
+.card-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.icon-button mat-icon {
+  font-size: 18px; /* Adjust the size of the icons */
 }
 
 .card p {
@@ -74,29 +83,7 @@ li {
 }
 
 /* Style for the button using Angular Material */
-.mat-button {
-  background-color: #1976d2;
-
-}
-
-.mat-button:hover {
-  background-color: #1565c0;
-}
-.card button:hover {
-  background-color: #1565c0;
-}
-
-/* Styles for the container and title */
-.content {
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  background: linear-gradient(135deg, #ece9e6, #ffffff);
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-}
-
-
+.mat-button:hover,
 .card button:hover {
   background-color: #1565c0;
 }
@@ -124,14 +111,4 @@ li {
   margin-left: auto;
   padding: 10px 20px; /* Added padding for larger button */
   font-size: 1.2em; /* Increased font size */
-}
-
-/* Keyframes for the floating effect */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
 }
