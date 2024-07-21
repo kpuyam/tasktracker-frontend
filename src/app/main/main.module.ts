@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatDialogModule } from '@angular/material/dialog';
 import { ApiService } from '../api.service';
 import { NavbarComponent } from './Headers/navbar/navbar.component';
 import { TasksHomeComponent } from './homepage/tasks-home/tasks-home.component';
@@ -26,6 +27,8 @@ import { AuthGuard } from '../auth.guard';
 import { AuthService } from '../auth.service';
 import { MatMenuModule } from '@angular/material/menu';
 import { NewProjectComponent } from './projects-section/new-project/new-project.component';
+import { EditProjectComponent } from './projects-section/edit-project/edit-project.component';
+import { ConfirmationDialogComponent } from './projects-section/confirmation-dialog/confirmation-dialog.component';
 
 const routes: Routes = [
     {
@@ -35,9 +38,10 @@ const routes: Routes = [
       children: [
         { path: 'home', component: HomepageComponent },
         { path: 'projects', component: ProjectsComponent },
+        { path: 'projects/new', component: NewProjectComponent },
         { path: 'projects/:id', component: ProjectDetailComponent },
         { path: 'projects/:id/tasks', component: TasksComponent },
-        { path: 'new-project', component: NewProjectComponent },
+        { path: 'projects/edit/:id', component: EditProjectComponent },
         { path: '', redirectTo: 'home', pathMatch: 'full' },
       ]
     }
@@ -55,6 +59,8 @@ const routes: Routes = [
     TasksHomeComponent,
     HomepageComponent,
     NewProjectComponent,
+    EditProjectComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -72,6 +78,7 @@ const routes: Routes = [
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatDialogModule,
     RouterModule.forChild(routes),
   ],
   exports:[
