@@ -22,7 +22,6 @@ import { TokenRefreshInterceptor } from './token-refresh.interceptor';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MainModule } from './main/main.module';
 import { SignupComponent } from './signup/signup.component';
-import { NewProjectComponent } from './main/projects-section/new-project/new-project.component';
 
 @NgModule({
   declarations: [
