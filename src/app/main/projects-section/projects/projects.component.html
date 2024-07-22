@@ -1,7 +1,10 @@
 <div class="content">
   <div class="title">
     <h4>Projects</h4>
-    <button mat-raised-button color="primary" class="new-project-button" (click)="navigateToAddProject()">+ New Project</button>
+    <button mat-raised-button color="primary" class="new-project-button"
+        (click)="navigateToAddProject()" *ngIf="isAdmin">
+  + New Project
+</button>
   </div>
   <div class="card-container">
     <ul>

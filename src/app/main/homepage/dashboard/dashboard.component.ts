@@ -40,12 +40,7 @@ export class DashboardComponent {
     this.selectedProjectId = projectId;
     this.apiService.getTask(projectId).subscribe((tasks: any[]) => {
       this.tasks.emit(tasks);
-
     });
-  }
-
-  showTeammates(projectId: number): void {
-    this.selectedProjectId = projectId;
     this.apiService.getUsersByProject(projectId).subscribe((data: any) => {
       console.log("gh",data.project_owner);
       this.selectedUsers = {
@@ -56,6 +51,7 @@ export class DashboardComponent {
       this.users.emit(this.selectedUsers);
     });
   }
+
 
 
 }

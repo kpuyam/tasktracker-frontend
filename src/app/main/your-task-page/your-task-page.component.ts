@@ -11,10 +11,12 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
   styleUrls: ['./your-task-page.component.css']
 })
 export class YourTaskPageComponent implements OnInit {
+  users: any[] = [];
   newTasks: Task[] = [];
   inProgressTasks: Task[] = [];
   completedTasks: Task[] = [];
   acceptedTasks: Task[] = [];
+  isReadOnly: boolean = false;
 
   constructor(private apiService: ApiService, private dialog: MatDialog) {}
 
@@ -29,6 +31,29 @@ export class YourTaskPageComponent implements OnInit {
     });
 
     this.fetchTasks();
+
+    this.apiService.getUsers().subscribe((users: any[]) => {
+      this.users = users.reduce((acc, user) => {
+        acc[user.id] = user.username;
+        return acc;
+      }, {});
+    });
+
+    this.checkReadOnlyRole();
+  }
+
+  checkReadOnlyRole(): void {
+    this.apiService.getUserDetails().subscribe(userDetails => {
+      const userId = userDetails.id;
+      this.apiService.getRole(userId).subscribe((role : any) => {
+        const read_only = role[0].role;
+
+        if (read_only == "read_only") {
+
+          this.isReadOnly = true;
+        }
+      });
+    });
   }
 
   fetchTasks(): void {
