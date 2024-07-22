@@ -71,6 +71,10 @@ export class ApiService {
   }
 
 
+  updateUserRole(roleId: number, userId: number): Observable<any> {
+    return this.http.post(`${this.baseUrl}/roles/${roleId}/update_user/`, { user_id: userId });
+  }
+
   updateTask(taskId: number, task: any): Observable<any> {
     return this.http.put<any>(`${this.baseUrl}/tasks/${taskId}/`, task);
   }
