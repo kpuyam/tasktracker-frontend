@@ -28,7 +28,8 @@ export class NewProjectComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.ApiService.getUsers().subscribe(users => {
+    this.ApiService.getUsers("task_creator").subscribe(users => {
+      console.log(users);
       this.users = users;
     });
   }

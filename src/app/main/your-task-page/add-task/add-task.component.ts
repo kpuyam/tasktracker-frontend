@@ -15,7 +15,7 @@ export class AddTaskComponent implements OnInit {
   projects: any[] = [];
 
   ngOnInit(): void {
-    this.ApiService.getUsers().subscribe(users => {
+    this.ApiService.getUsers("read_only").subscribe(users => {
       this.users = users;
     });
     this.ApiService.getProjects().subscribe(projects => {

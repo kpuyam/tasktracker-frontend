@@ -17,6 +17,7 @@ export class ApiService {
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   getProjects(): Observable<any[]> {
+    console.log("I came to project servicce")
     return this.http.get<any[]>(`${this.baseUrl}/projects/`);
   }
 
@@ -51,7 +52,10 @@ export class ApiService {
     return this.http.post<any>(`${this.baseUrl}/tasks/`, taskData);
   }
 
-  getUsers(): Observable<any[]> {
+  getUsers(role?: string): Observable<any[]> {
+    if (role) {
+      return this.http.get<any[]>(`${this.baseUrl}/users/?role=${role}`);
+    }
     return this.http.get<any[]>(`${this.baseUrl}/users`);
   }
 
