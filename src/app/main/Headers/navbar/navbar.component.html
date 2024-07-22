@@ -3,6 +3,7 @@
   <span class="example-spacer"></span>
   <button mat-button routerLink="/projects" routerLinkActive="active-link">Projects</button>
   <button mat-button routerLink="/yourtask" routerLinkActive="active-link">Your Tasks</button>
+  <button mat-button *ngIf="isAdmin" routerLink="/roles" routerLinkActive="active-link">Assign Roles</button>
   <button mat-icon-button aria-label="Notification icon">
     <mat-icon>notifications</mat-icon>
   </button>
@@ -17,7 +18,7 @@
           {{ user?.username[0] }}
         </div>
         <mat-card-title>{{ user?.username }}</mat-card-title>
-        <mat-card-subtitle> {{ user?.email }}</mat-card-subtitle>
+        <mat-card-subtitle>{{ user?.email }}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
         <p><strong>First Name:</strong> {{ user?.first_name }}</p>
