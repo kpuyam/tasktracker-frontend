@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders,HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
+import { Task } from './main/main.models';
 
 
 @Injectable({
@@ -23,7 +24,10 @@ export class ApiService {
     return this.http.get<any>(`${this.baseUrl}/projects/${projectId}/`);
   }
 
-  getTasks(projectId: number): Observable<any[]> {
+  getTasks(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/tasks/`);
+  }
+  getTask(projectId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/tasks/?project=${projectId}`);
   }
 
@@ -43,13 +47,12 @@ export class ApiService {
   createProject(projectData: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/projects/`, projectData);
   }
+  createTask(taskData: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/tasks/`, taskData);
+  }
 
   getUsers(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/users`);
-  }
-
-  createTask(task: any): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/tasks/`, task);
   }
 
   updateTask(taskId: number, task: any): Observable<any> {
@@ -59,6 +62,16 @@ export class ApiService {
   deleteTask(taskId: number): Observable<any> {
     return this.http.delete<any>(`${this.baseUrl}/tasks/${taskId}/`);
   }
+  getTasksByStatus(status: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/tasks?status=${status}`);
+    // Replace 'status' with the parameter your backend expects for filtering by status
+  }
+
+  updateTaskStatus(task: Task): Observable<Task> {
+    console.log("Hii shiva");
+    return this.http.put<Task>(`${this.baseUrl}/tasks/${task.id}/`, task);
+  }
+
 
   private getHeaders(): HttpHeaders {
     const token = this.authService.getToken();

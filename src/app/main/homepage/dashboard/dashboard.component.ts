@@ -16,7 +16,7 @@ export class DashboardComponent {
   itemsPerSlide = 6;
 
   selectedProjectId: number | null = null;
-  
+
   selectedTasks: any[] = [];
   selectedUsers: { projectOwner: any, teammates: any[] } = { projectOwner: null, teammates: [] };
 
@@ -38,9 +38,9 @@ export class DashboardComponent {
 
   showTasks(projectId: number): void {
     this.selectedProjectId = projectId;
-    this.apiService.getTasks(projectId).subscribe((tasks: any[]) => {
+    this.apiService.getTask(projectId).subscribe((tasks: any[]) => {
       this.tasks.emit(tasks);
-     
+
     });
   }
 
@@ -54,6 +54,6 @@ export class DashboardComponent {
       this.users.emit(this.selectedUsers);
     });
   }
- 
+
 
 }
