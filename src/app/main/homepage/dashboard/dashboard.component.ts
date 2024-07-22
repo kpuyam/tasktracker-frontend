@@ -40,20 +40,18 @@ export class DashboardComponent {
     this.selectedProjectId = projectId;
     this.apiService.getTask(projectId).subscribe((tasks: any[]) => {
       this.tasks.emit(tasks);
-
     });
-  }
-
-  showTeammates(projectId: number): void {
-    this.selectedProjectId = projectId;
     this.apiService.getUsersByProject(projectId).subscribe((data: any) => {
+      console.log("gh",data.project_owner);
       this.selectedUsers = {
+
         projectOwner: data.project_owner,
         teammates: data.users.length> 0 ? data.users : null
       };
       this.users.emit(this.selectedUsers);
     });
   }
+
 
 
 }

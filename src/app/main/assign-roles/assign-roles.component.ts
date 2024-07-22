@@ -20,15 +20,20 @@ export class AssignRolesComponent implements OnInit {
   }
 
   loadRoles(): void {
-    this.apiService.getRoles().subscribe(
-      roles => this.roles = roles,
-      error => console.error('Error fetching roles', error)
-    );
+    this.roles= [
+      { id: 1, name: 'Admin' },
+      { id: 2, name: 'Task Creator' },
+      { id: 3, name: 'Read Only' }
+    ];
+
   }
 
   loadUsers(): void {
-    this.apiService.getUsers().subscribe(
-      users => this.users = users.filter(user => !user.role_id),  // Filter users without roles
+    this.apiService.getUserswithoutRole().subscribe(
+      users => {
+        this.users = users;
+        console.log(users);
+      },  // Filter users without roles
       error => console.error('Error fetching users', error)
     );
   }

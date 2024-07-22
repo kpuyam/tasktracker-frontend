@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../auth.service';
 import { ApiService } from '../../../api.service';
+import { User } from '../../main.models';
 
 @Component({
   selector: 'app-navbar',
@@ -16,18 +17,20 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.apiService.getUserDetails().subscribe(
       (user: any) => {
+        if(user){
         this.user = user;
-        this.checkAdminRole();
+        this.checkAdminRole(user.id);
+        }
       }
     );
   }
 
-  checkAdminRole(): void {
-    this.apiService.getRoles().subscribe(
-      (roles: any[]) => {
-        const adminRole = roles.find(role => role.name === 'admin');
-        if (adminRole) {
-          this.isAdmin = adminRole.users.includes(this.user?.id);
+  checkAdminRole(id : number): void {
+    this.apiService.getRole(id).subscribe(
+      (role: any) => {
+        const adminRole = role[0].role;
+        if (adminRole == "admin") {
+          this.isAdmin = true;
         }
       }
     );

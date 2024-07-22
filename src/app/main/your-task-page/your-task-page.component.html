@@ -1,4 +1,4 @@
-<button mat-raised-button color="primary" class="new-task-button" (click)="openDialog()">+ New Task</button>
+<button mat-raised-button color="primary" class="new-task-button" *ngIf= "!isReadOnly"  (click)="openDialog()">+ New Task</button>
 
 <div class="task-columns" cdkDropListGroup>
   <div class="task-column">

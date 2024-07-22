@@ -40,9 +40,11 @@ export class ProjectsComponent implements OnInit {
   checkAdminRole(): void {
     this.apiService.getUserDetails().subscribe(userDetails => {
       const userId = userDetails.id;
-      this.apiService.getRoles().subscribe((roles: any[]) => {
-        const adminRole = roles.find(role => role.name === 'admin');
-        this.isAdmin = adminRole && adminRole.users.includes(userId);
+      this.apiService.getRole(userId).subscribe((role : any) => {
+        const adminRole = role[0].role;
+        if (adminRole == "admin") {
+          this.isAdmin = true;
+        }
       });
     });
   }

@@ -17,6 +17,7 @@ export class ApiService {
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   getProjects(): Observable<any[]> {
+    console.log("I came to project servicce")
     return this.http.get<any[]>(`${this.baseUrl}/projects/`);
   }
 
@@ -51,9 +52,24 @@ export class ApiService {
     return this.http.post<any>(`${this.baseUrl}/tasks/`, taskData);
   }
 
-  getUsers(): Observable<any[]> {
+  getUsers(role?: string): Observable<any[]> {
+    if (role) {
+      return this.http.get<any[]>(`${this.baseUrl}/users/?role=${role}`);
+    }
     return this.http.get<any[]>(`${this.baseUrl}/users`);
   }
+  getUserswithoutRole(){
+    return this.http.get<any[]>(`${this.baseUrl}/users/?role=no_role`);
+  }
+  updateUserRole(selectedRoleId: number, selectedUserId: number): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('auth_token')}`);
+    const body = {
+      selectedRoleId: selectedRoleId,
+      selectedUserId: selectedUserId
+    };
+    return this.http.post<any>(`${this.baseUrl}/update-user-role/`, body,{headers});
+  }
+
 
   updateUserRole(roleId: number, userId: number): Observable<any> {
     return this.http.post(`${this.baseUrl}/roles/${roleId}/update_user/`, { user_id: userId });
@@ -86,8 +102,11 @@ export class ApiService {
     return this.http.get<any[]>(`${this.baseUrl}/users_by_project/${projectId}`);
   }
 
-  getRoles(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/roles/`);
+  getRole(id?: number): Observable<any> {
+    if(id){
+      return this.http.get<any>(`${this.baseUrl}/roles/?userid=${id}`);
+    }
+    return this.http.get<any>(`${this.baseUrl}/roles/`);
   }
 
 }
