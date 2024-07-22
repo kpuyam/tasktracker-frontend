@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MainComponent } from './main.component';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './homepage/dashboard/dashboard.component';
@@ -36,7 +36,7 @@ import { DialogModule } from '@angular/cdk/dialog';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { AssignRolesComponent } from './assign-roles/assign-roles.component';
 
 const routes: Routes = [
     {
@@ -52,6 +52,7 @@ const routes: Routes = [
         { path: 'projects/edit/:id', component: EditProjectComponent },
         { path: 'new-project', component: NewProjectComponent },
         { path: 'yourtask', component:  YourTaskPageComponent},
+        { path: 'roles', component: AssignRolesComponent},
         { path: '', redirectTo: 'home', pathMatch: 'full' },
       ]
     }
@@ -73,9 +74,11 @@ const routes: Routes = [
     ConfirmationDialogComponent,
     YourTaskPageComponent,
     AddTaskComponent,
+    AssignRolesComponent,
   ],
   imports: [
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     MatIconModule,
     MatButtonModule,
@@ -96,7 +99,6 @@ const routes: Routes = [
     DragDropModule,
     BrowserAnimationsModule,
     BrowserModule,
-    CarouselModule,
     RouterModule.forChild(routes),
   ],
   exports:[
