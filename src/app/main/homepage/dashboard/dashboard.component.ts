@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent {
 
@@ -37,7 +37,6 @@ export class DashboardComponent {
   }
 
   showTasks(projectId: number): void {
-    console.log(projectId);
     this.selectedProjectId = projectId;
     this.apiService.getTask(projectId).subscribe((tasks: any[]) => {
       this.tasks.emit(tasks);

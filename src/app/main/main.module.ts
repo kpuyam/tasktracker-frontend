@@ -29,7 +29,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { NewProjectComponent } from './projects-section/new-project/new-project.component';
 import { EditProjectComponent } from './projects-section/edit-project/edit-project.component';
 import { ConfirmationDialogComponent } from './projects-section/confirmation-dialog/confirmation-dialog.component';
-import { CarouselModule } from 'primeng/carousel';
 import { YourTaskPageComponent } from './your-task-page/your-task-page.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AddTaskComponent } from './your-task-page/add-task/add-task.component';
@@ -37,6 +36,7 @@ import { DialogModule } from '@angular/cdk/dialog';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 const routes: Routes = [
     {
@@ -91,12 +91,12 @@ const routes: Routes = [
     MatDatepickerModule,
     MatNativeDateModule,
     MatDialogModule,
-    CarouselModule,
     MatTabsModule,
     DialogModule,
     DragDropModule,
     BrowserAnimationsModule,
     BrowserModule,
+    CarouselModule,
     RouterModule.forChild(routes),
   ],
   exports:[

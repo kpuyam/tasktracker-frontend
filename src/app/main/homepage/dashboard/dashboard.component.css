@@ -73,20 +73,3 @@ button.mat-button {
 button.mat-button:hover {
   background: rgba(0, 0, 0, 0.3);
 }
-.full-width-component {
-  height: 100%;
-  width: 100%;
-}
-.task-card {
-  margin: 10px;
-}
-
-.carousel-caption {
-  text-align: left;
-}
-
-.carousel .slide .row {
-  display: flex;
-  justify-content: space-around;
-}
-
