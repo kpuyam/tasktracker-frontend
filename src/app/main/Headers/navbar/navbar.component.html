@@ -1,13 +1,13 @@
-<mat-toolbar class="custom-toolbar" color="primary">
+<mat-toolbar class="custom-toolbar" color="">
   <span class="app-title" routerLink="/home" style="cursor: pointer;">Project Tracker</span>
   <span class="example-spacer"></span>
-  <button mat-button routerLink="/projects" routerLinkActive="active-link">Projects</button>
-  <button mat-button routerLink="/yourtask" routerLinkActive="active-link">Your Tasks</button>
-  <button mat-button *ngIf="isAdmin" routerLink="/roles" routerLinkActive="active-link">Assign Roles</button>
-  <button mat-icon-button aria-label="Notification icon">
+  <button mat-button routerLink="/projects" routerLinkActive="active-link" class="white-text">Projects</button>
+  <button mat-button routerLink="/yourtask" routerLinkActive="active-link" class="white-text">Your Tasks</button>
+  <button mat-button *ngIf="isAdmin" routerLink="/roles" routerLinkActive="active-link" class="white-text"  >Assign Roles</button>
+  <button mat-icon-button aria-label="Notification icon" class="white-text">
     <mat-icon>notifications</mat-icon>
   </button>
-  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="User icon">
+  <button mat-icon-button class="white-text" [matMenuTriggerFor]="menu" aria-label="User icon">
     <mat-icon>account_circle</mat-icon>
   </button>
 

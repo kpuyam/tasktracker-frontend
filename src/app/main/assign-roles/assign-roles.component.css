@@ -1,11 +1,31 @@
+.assign-role-container {
+  display: flex;
+  margin-top: 0px;
+  justify-content: center;
+
+  background-color: #f5f5f5;
+}
+
 .assign-role-form {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 30px;
   max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
+  width: 100%;
 }
 
 .form-group {
   margin-bottom: 20px;
+}
+
+.dropdown-spacing {
+  margin-bottom: 16px; /* Adjust the value as needed */
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-end !important; /* Align the button to the right */
 }
 
 .custom-button {
@@ -22,10 +42,26 @@
   transition: background-color 0.3s ease;
 }
 
+.assign-role-heading {
+   /* Space between heading and form */
+  margin: 0 auto; /* Center horizontally */
+  width: fit-content; /* Adjust width to fit content */
+  text-align: center; /* Center text inside the div */
+}
+
 .custom-button:hover {
   background-color: #1976d2;
 }
 
 .custom-button:active {
   background-color: #1565c0;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+/* New CSS class to move the second dropdown to the right */
+.move-right {
+  margin-left: auto; /* This pushes the dropdown to the right */
 }

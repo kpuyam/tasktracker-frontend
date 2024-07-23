@@ -3,13 +3,20 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f5f5f5;
+  background-image: url('./../mascot.jpg'); /* Replace with your image path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* Apply blur to the background image */
 }
 
-mat-card {
+/* Ensure mat-card content is not blurred */
+.mat-card {
   width: 90%;
   max-width: 400px;
   padding: 20px;
+  position: relative; /* Ensure z-index works */
+  z-index: 1; /* Ensure card content is above blurred background */
 }
 
 .welcome-text {

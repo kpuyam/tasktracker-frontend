@@ -17,7 +17,6 @@ export class ApiService {
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   getProjects(): Observable<any[]> {
-    console.log("I came to project servicce")
     return this.http.get<any[]>(`${this.baseUrl}/projects/`);
   }
 
@@ -30,6 +29,12 @@ export class ApiService {
   }
   getTask(projectId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/tasks/?project=${projectId}`);
+  }
+  getUserName(id: any): Observable<any>{
+    if(id.type=="string"){
+      id = parseInt(id, 10);
+    }
+    return this.http.get<any>(`${this.baseUrl}/users/${id}`);
   }
 
   getUserDetails(): Observable<any> {

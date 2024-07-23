@@ -2,6 +2,10 @@
     background-color: #007FFF;
     color: white; /* Ensure text is visible */
   }
+  .white-text {
+    color: white !important;;
+}
+
 
   .example-spacer {
     flex: 1 1 auto;
