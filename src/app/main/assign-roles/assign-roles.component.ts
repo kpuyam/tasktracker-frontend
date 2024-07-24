@@ -20,12 +20,11 @@ export class AssignRolesComponent implements OnInit {
   }
 
   loadRoles(): void {
-    this.roles= [
+    this.roles = [
       { id: 1, name: 'Admin' },
       { id: 2, name: 'Task Creator' },
       { id: 3, name: 'Read Only' }
     ];
-
   }
 
   loadUsers(): void {
@@ -33,7 +32,7 @@ export class AssignRolesComponent implements OnInit {
       users => {
         this.users = users;
         console.log(users);
-      },  // Filter users without roles
+      },
       error => console.error('Error fetching users', error)
     );
   }
@@ -43,7 +42,8 @@ export class AssignRolesComponent implements OnInit {
       this.apiService.updateUserRole(this.selectedRoleId, this.selectedUserId).subscribe(
         response => {
           console.log('Role assigned successfully', response);
-          // Optionally, refresh or update the UI
+          alert('Role Assigned Successfully!');
+          location.reload();
         },
         error => {
           console.error('Error assigning role', error);
