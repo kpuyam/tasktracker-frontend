@@ -43,7 +43,6 @@
   color: #444;
   padding-left: 5px;
   font-size: 18px;
-  line-height: 2;
 }
 
 .project-card p {
@@ -52,6 +51,7 @@
   font-family: 'Poppins', sans-serif;
   color: #444;
   margin-top: 5px;
+
 }
 
 .project-name {
@@ -64,6 +64,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 2;
 }
 
 .project-name:hover {
