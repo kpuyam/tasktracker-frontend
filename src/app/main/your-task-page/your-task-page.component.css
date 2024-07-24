@@ -46,3 +46,6 @@
   gap: 20px; /* Add some space between the containers */
   margin: 20px; /* Add margin around the container to avoid sticking to edges */
 }
+.task-column h3{
+  text-align: center;
+}
