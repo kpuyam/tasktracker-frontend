@@ -1,6 +1,6 @@
 .assign-role-heading {
-  margin-top: 20px; /* Add spacing above the heading */
-  margin-bottom: 20px; /* Add spacing below the heading */
+  margin-top: 20px;
+  margin-bottom: 20px;
   text-align: center;
 }
 
@@ -9,7 +9,7 @@
   justify-content: center;
   align-items: center;
   background-color: #f5f5f5;
-  padding: 20px; /* Adjust padding to create space around the form */
+  padding: 20px;
 }
 
 .assign-role-form {
