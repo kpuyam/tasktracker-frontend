@@ -5,6 +5,8 @@
   padding: 20px;
   background: linear-gradient(135deg, #e0eafc, #cfdef3);
   gap: 20px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .project-card {
@@ -39,7 +41,9 @@
   padding: 0;
   font-family: 'Poppins', sans-serif;
   color: #444;
-  margin-bottom: 5px;
+  padding-left: 5px;
+  font-size: 18px;
+  line-height: 2;
 }
 
 .project-card p {
@@ -48,7 +52,6 @@
   font-family: 'Poppins', sans-serif;
   color: #444;
   margin-top: 5px;
-
 }
 
 .project-name {
