@@ -14,6 +14,7 @@ export class DashboardComponent {
   projects: { name: string; description: string; start_date: string; end_date: string; owner: string; id: number }[] = []; // Array to hold project data
   noWrap = false; // Optional: Set to true if you want the carousel to loop indefinitely
   itemsPerSlide = 6;
+  allusers: { [key: number]: string } = {};
 
   selectedProjectId: number | null = null;
 
@@ -27,8 +28,16 @@ export class DashboardComponent {
   constructor(private apiService: ApiService, private router: Router) {}
 
   ngOnInit(): void {
+    // Fetch projects
     this.apiService.getProjects().subscribe((projects: any[]) => {
       this.projects = projects;
+
+      // Fetch users
+      this.projects.forEach(project => {
+        this.apiService.getUserName(project.owner).subscribe((userdetails: any) => {
+          project.owner = userdetails.username || 'Unknown';
+        });
+      });
     });
   }
 
@@ -38,13 +47,18 @@ export class DashboardComponent {
 
   showTasks(projectId: number): void {
     this.selectedProjectId = projectId;
-    this.apiService.getTask(projectId).subscribe((tasks: any[]) => {
-      this.tasks.emit(tasks);
+    this.apiService.getTasksByProject(projectId).subscribe((tasks: any) => {
+      let projectTasks = tasks.tasks || [];
+      projectTasks.forEach((task: any) => { // Explicitly specify type 'any' for 'task'
+        this.apiService.getUserName(task.owner).subscribe((userdetails: any) => {
+          task.owner = userdetails.username || 'Unknown';
+        });
+      });
+      this.tasks.emit(projectTasks);
     });
-    this.apiService.getUsersByProject(projectId).subscribe((data: any) => {
-      console.log("gh",data.project_owner);
-      this.selectedUsers = {
 
+    this.apiService.getUsersByProject(projectId).subscribe((data: any) => {
+      this.selectedUsers = {
         projectOwner: data.project_owner,
         teammates: data.users.length> 0 ? data.users : null
       };

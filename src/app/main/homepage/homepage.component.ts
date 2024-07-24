@@ -16,7 +16,6 @@ onTasksReceived(tasks: any[]): void {
 }
 
 onTeammatesReceived(data: { projectOwner: any, teammates: any[] | null }): void {
-  console.log("Chenna",data);
   this.projectOwner = data.projectOwner;
   this.teammates = data.teammates;
 }
