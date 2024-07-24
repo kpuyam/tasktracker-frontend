@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../api.service';
 import { Task } from '../main.models';
-import { MatDialog } from '@angular/material/dialog';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { forkJoin, BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-your-task-page',
@@ -15,47 +15,37 @@ export class YourTaskPageComponent implements OnInit {
   inProgressTasks: Task[] = [];
   completedTasks: Task[] = [];
   acceptedTasks: Task[] = [];
-  isReadOnly: boolean = false;
+  isReadOnly: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
   constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
-    this.apiService.getTasks().subscribe((tasks: Task[]) => {
+    const tasks$ = this.apiService.getTasks();
+    const users$ = this.apiService.getUsers();
+    const userDetails$ = this.apiService.getUserDetails();
+
+    forkJoin([tasks$, users$, userDetails$]).subscribe(([tasks, users, userDetails]) => {
       this.newTasks = tasks.filter(task => task.status === 'new' || task.status === 'not_started');
       this.inProgressTasks = tasks.filter(task => task.status === 'in-progress');
       this.completedTasks = tasks.filter(task => task.status === 'completed');
       this.acceptedTasks = tasks.filter(task => task.status === 'accepted');
-      console.log("HIII",this.newTasks);
+
+      this.users = users.reduce((acc, user) => {
+        acc[user.id] = user.username;
+        return acc;
+      }, {});
+
+      this.apiService.getRole(userDetails.id).subscribe((role: any) => {
+        const read_only = role[0].role;
+        this.isReadOnly.next(read_only === "read_only");
+        console.log("isReadOnly initialized:", this.isReadOnly.value);
+      });
     });
 
-    // this.fetchTasks();
-
-    // this.apiService.getUsers().subscribe((users: any[]) => {
-    //   this.users = users.reduce((acc, user) => {
-    //     acc[user.id] = user.username;
-    //     return acc;
-    //   }, {});
-    // });
-
-    // this.checkReadOnlyRole();
+    this.fetchTasks();
   }
 
-  // checkReadOnlyRole(): void {
-  //   this.apiService.getUserDetails().subscribe(userDetails => {
-  //     const userId = userDetails.id;
-  //     this.apiService.getRole(userId).subscribe((role : any) => {
-  //       const read_only = role[0].role;
-
-  //       if (read_only == "read_only") {
-
-  //         this.isReadOnly = true;
-  //       }
-  //     });
-  //   });
-  // }
-
   fetchTasks(): void {
-
     this.apiService.getTasks().subscribe(
       (tasks: Task[]) => {
         console.log(tasks);
@@ -71,8 +61,6 @@ export class YourTaskPageComponent implements OnInit {
     );
   }
 
-
-
   dropMultiList(event: CdkDragDrop<Task[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -87,7 +75,7 @@ export class YourTaskPageComponent implements OnInit {
             event.previousIndex,
             event.currentIndex
           );
-          console.log('Task status updated successfully',response);
+          console.log('Task status updated successfully', response);
           this.fetchTasks(); // Refresh tasks after update
         },
         error => {
@@ -114,5 +102,9 @@ export class YourTaskPageComponent implements OnInit {
 
   allDropListsExcept(currentListId: string): string[] {
     return ['newTasks', 'inProgressTasks', 'completedTasks', 'acceptedTasks'].filter(id => id !== currentListId);
+  }
+
+  ReadonlyPredicate(): (drag: any, drop: any) => boolean {
+    return () => !this.isReadOnly.value;
   }
 }

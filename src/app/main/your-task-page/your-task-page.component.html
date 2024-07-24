@@ -67,7 +67,8 @@
          class="task-list"
          [cdkDropListData]="acceptedTasks"
          [cdkDropListConnectedTo]="allDropListsExcept('acceptedTasks')"
-         (cdkDropListDropped)="dropMultiList($event)">
+         (cdkDropListDropped)="dropMultiList($event)"
+         [cdkDropListEnterPredicate]="ReadonlyPredicate()">
       <mat-card *ngFor="let task of acceptedTasks" class="task-card" cdkDrag>
         <mat-card-header>
           <mat-card-title>{{ task.description }}</mat-card-title>
