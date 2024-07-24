@@ -47,19 +47,18 @@ export class DashboardComponent {
 
   showTasks(projectId: number): void {
     this.selectedProjectId = projectId;
-    this.apiService.getTask(projectId).subscribe((tasks: any[]) => {
-      tasks.forEach(task => {
+    this.apiService.getTasksByProject(projectId).subscribe((tasks: any) => {
+      let projectTasks = tasks.tasks || [];
+      projectTasks.forEach((task: any) => { // Explicitly specify type 'any' for 'task'
         this.apiService.getUserName(task.owner).subscribe((userdetails: any) => {
-          console.log(userdetails);
           task.owner = userdetails.username || 'Unknown';
         });
       });
-      this.tasks.emit(tasks);
+      this.tasks.emit(projectTasks);
     });
-    this.apiService.getUsersByProject(projectId).subscribe((data: any) => {
-      console.log("gh",data.project_owner);
-      this.selectedUsers = {
 
+    this.apiService.getUsersByProject(projectId).subscribe((data: any) => {
+      this.selectedUsers = {
         projectOwner: data.project_owner,
         teammates: data.users.length> 0 ? data.users : null
       };

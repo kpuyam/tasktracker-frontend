@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../api.service';
 import { Task } from '../main.models';
 import { MatDialog } from '@angular/material/dialog';
-import { AddTaskComponent } from './add-task/add-task.component';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
@@ -18,43 +17,42 @@ export class YourTaskPageComponent implements OnInit {
   acceptedTasks: Task[] = [];
   isReadOnly: boolean = false;
 
-  constructor(private apiService: ApiService, private dialog: MatDialog) {}
+  constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
     this.apiService.getTasks().subscribe((tasks: Task[]) => {
-      console.log(tasks);
       this.newTasks = tasks.filter(task => task.status === 'new' || task.status === 'not_started');
       this.inProgressTasks = tasks.filter(task => task.status === 'in-progress');
       this.completedTasks = tasks.filter(task => task.status === 'completed');
       this.acceptedTasks = tasks.filter(task => task.status === 'accepted');
-      console.log(this.newTasks);
+      console.log("HIII",this.newTasks);
     });
 
-    this.fetchTasks();
+    // this.fetchTasks();
 
-    this.apiService.getUsers().subscribe((users: any[]) => {
-      this.users = users.reduce((acc, user) => {
-        acc[user.id] = user.username;
-        return acc;
-      }, {});
-    });
+    // this.apiService.getUsers().subscribe((users: any[]) => {
+    //   this.users = users.reduce((acc, user) => {
+    //     acc[user.id] = user.username;
+    //     return acc;
+    //   }, {});
+    // });
 
-    this.checkReadOnlyRole();
+    // this.checkReadOnlyRole();
   }
 
-  checkReadOnlyRole(): void {
-    this.apiService.getUserDetails().subscribe(userDetails => {
-      const userId = userDetails.id;
-      this.apiService.getRole(userId).subscribe((role : any) => {
-        const read_only = role[0].role;
+  // checkReadOnlyRole(): void {
+  //   this.apiService.getUserDetails().subscribe(userDetails => {
+  //     const userId = userDetails.id;
+  //     this.apiService.getRole(userId).subscribe((role : any) => {
+  //       const read_only = role[0].role;
 
-        if (read_only == "read_only") {
+  //       if (read_only == "read_only") {
 
-          this.isReadOnly = true;
-        }
-      });
-    });
-  }
+  //         this.isReadOnly = true;
+  //       }
+  //     });
+  //   });
+  // }
 
   fetchTasks(): void {
 
@@ -73,32 +71,14 @@ export class YourTaskPageComponent implements OnInit {
     );
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(AddTaskComponent, {
-      width: '600px',
-      data: {}
-    });
 
-    dialogRef.afterClosed().subscribe(formattedTaskData => {
-      if (formattedTaskData) {
-        this.apiService.createTask(formattedTaskData).subscribe(
-          () => {
-          },
-          error => console.error('Error creating task:', error)
-        );
-        this.fetchTasks();
-      }
-    });
-  }
 
   dropMultiList(event: CdkDragDrop<Task[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      console.log("HII");
       const task = event.previousContainer.data[event.previousIndex];
       task.status = this.getStatusForContainer(event.container.id);
-      console.log("HII",task);
       this.apiService.updateTaskStatus(task).subscribe(
         response => {
           transferArrayItem(

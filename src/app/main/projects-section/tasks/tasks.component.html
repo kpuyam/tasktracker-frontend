@@ -1,5 +1,7 @@
 <div class="project-name" *ngIf="project">
   <h4>{{ project.name }}</h4>
+  <button mat-raised-button color="primary" class="new-task-button" *ngIf= "!isReadOnly"  (click)="openDialog()">+ New Task</button>
+
 </div>
 <div class="table-container">
   <table>

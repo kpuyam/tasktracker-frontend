@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../../api.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AddTaskComponent } from './add-task/add-task.component';
 
 @Component({
   selector: 'app-tasks',
@@ -11,8 +13,9 @@ export class TasksComponent implements OnInit {
   project: any;
   tasks: any[] = [];
   users: any = {};
+  isReadOnly: boolean = false;
 
-  constructor(private route: ActivatedRoute, private apiService: ApiService) { }
+  constructor(private route: ActivatedRoute, private apiService: ApiService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     const projectId = Number(this.route.snapshot.paramMap.get('id'));
@@ -21,8 +24,8 @@ export class TasksComponent implements OnInit {
       this.project = project;
     });
 
-    this.apiService.getTask(projectId).subscribe((data: any[]) => {
-      this.tasks = data;
+    this.apiService.getTasksByProject(projectId).subscribe((tasks: any) => {
+      this.tasks = tasks.tasks || [];
     });
 
     this.apiService.getUsers().subscribe((users: any[]) => {
@@ -32,7 +35,22 @@ export class TasksComponent implements OnInit {
       }, {});
     });
   }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AddTaskComponent, {
+      width: '600px',
+      data: {}
+    });
 
+    dialogRef.afterClosed().subscribe(formattedTaskData => {
+      if (formattedTaskData) {
+        this.apiService.createTask(formattedTaskData).subscribe(
+          () => {
+          },
+          error => console.error('Error creating task:', error)
+        );
+      }
+    });
+  }
   getUserName(userId: number): string {
     return this.users[userId] || 'Unknown';
   }

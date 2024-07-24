@@ -13,7 +13,7 @@ export class AuthService {
   private signupUrl = 'http://127.0.0.1:8000/api/signup/';
   private baseUrl = 'http://127.0.0.1:8000/api/';
   private usersUrl = 'http://127.0.0.1:8000/api/users/';
-  
+
   private tokenKey = 'auth_token';
   private refreshTokenKey = 'refresh_token';
 
@@ -66,5 +66,5 @@ export class AuthService {
       }),
       catchError(this.handleError)
     );
-  } 
+  }
 }

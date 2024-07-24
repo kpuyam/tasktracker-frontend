@@ -31,12 +31,12 @@ import { EditProjectComponent } from './projects-section/edit-project/edit-proje
 import { ConfirmationDialogComponent } from './projects-section/confirmation-dialog/confirmation-dialog.component';
 import { YourTaskPageComponent } from './your-task-page/your-task-page.component';
 import { MatTabsModule } from '@angular/material/tabs';
-import { AddTaskComponent } from './your-task-page/add-task/add-task.component';
 import { DialogModule } from '@angular/cdk/dialog';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AssignRolesComponent } from './assign-roles/assign-roles.component';
+import { AddTaskComponent } from './projects-section/tasks/add-task/add-task.component';
 
 const routes: Routes = [
     {
