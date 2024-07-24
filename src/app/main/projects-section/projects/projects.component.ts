@@ -12,6 +12,7 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
 })
 export class ProjectsComponent implements OnInit {
   projects: any[] = [];
+  filteredProjects: any[] = [];
   users: any = {};
   isAdmin: boolean = false;
 
@@ -25,6 +26,7 @@ export class ProjectsComponent implements OnInit {
   ngOnInit(): void {
     this.apiService.getProjects().subscribe((data: any[]) => {
       this.projects = data;
+      this.filteredProjects = data;
     });
 
     this.apiService.getUsers().subscribe((users: any[]) => {
@@ -76,8 +78,20 @@ export class ProjectsComponent implements OnInit {
       if (result) {
         this.apiService.deleteProject(projectId).subscribe(() => {
           this.projects = this.projects.filter(project => project.id !== projectId);
+          this.filteredProjects = this.filteredProjects.filter(project => project.id !== projectId);
         });
       }
     });
+  }
+
+  onFilterInput(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    this.filterProjects(inputElement.value);
+  }
+
+  filterProjects(query: string): void {
+    this.filteredProjects = this.projects.filter(project =>
+      project.name.toLowerCase().includes(query.toLowerCase())
+    );
   }
 }

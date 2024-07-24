@@ -101,15 +101,22 @@ li {
 
 .title {
   display: flex;
-  justify-content: space-between; /* Adjusted for better spacing */
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  width: 100%; /* Expand to full width */
-  max-width: 1800px; /* Increased max width */
+  width: 100%;
+  max-width: 1800px;
+  gap: 20px;
 }
 
 .new-project-button {
   margin-left: auto;
   padding: 10px 20px; /* Added padding for larger button */
   font-size: 1.2em; /* Increased font size */
+}
+
+.filter-field {
+  margin-right: 30px; /* Add some space between the filter field and the new project button */
+  width: 800px; /* Increased width for the filter field */
+  text-decoration: none; /* Remove underline */
 }
