@@ -6,24 +6,24 @@
 </mat-card>
 
 <div *ngIf="!projectOwner && !teammates" class="no-users-message">
-  <p>Select any one project to see the project's users.</p>
+  <p>Click More to see the project's users.</p>
 </div>
 
 <!-- Display project owner and teammates based on selection -->
 <div *ngIf="projectOwner" class="teammates-container">
-  
+
   <!-- Project Owner Details -->
   <div class="project-owner-card">
     <h2>Project Owner</h2>
     <p>{{ projectOwner.first_name }} {{ projectOwner.last_name }} ({{ projectOwner.email }})</p>
   </div>
-  
+
   <!-- Message when no teammates are assigned to the project -->
   <div *ngIf="teammates === null" class="no-users-message">
     <h2>Teammates</h2>
     <p>This project hasn't been assigned to any users yet.</p>
   </div>
-  
+
   <!-- List of teammates when they exist -->
   <div *ngIf="teammates && teammates.length > 0">
     <h2>Teammates</h2>

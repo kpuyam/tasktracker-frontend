@@ -17,6 +17,7 @@ mat-card {
   color: #ff6f61;
   font-size: 1.2em;
   text-align: center;
+  margin: 20px 0;
 }
 
 .task-card {

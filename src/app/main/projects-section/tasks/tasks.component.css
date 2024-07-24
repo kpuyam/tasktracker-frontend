@@ -1,5 +1,19 @@
+.project-name {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #f2f2f2;
+}
+
 .project-name h4 {
-  padding: 10px 0 0 10px;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  color: #444;
+}
+
+.new-task-button {
+  margin-left: auto;
 }
 
 .table-container {
@@ -44,6 +58,19 @@ th:last-child, td:last-child {
   border-right: none;
 }
 
+.status-box {
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 25px;
+  line-height: 1;
+  cursor: pointer;
+}
+
 .status-completed {
   background-color: green;
 }
@@ -62,16 +89,4 @@ th:last-child, td:last-child {
 
 .status-new {
   background-color: gray;
-}
-
-.status-box {
-  color: white;
-  padding: 5px;
-  border-radius: 5px;
-  display: inline-block;
-  text-align: center;
-  width: 100px;
-  height: 25px;
-  line-height: 25px;
-  cursor: pointer;
 }

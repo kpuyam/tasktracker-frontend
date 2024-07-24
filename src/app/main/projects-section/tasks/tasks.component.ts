@@ -15,7 +15,11 @@ export class TasksComponent implements OnInit {
   users: any = {};
   isReadOnly: boolean = false;
 
-  constructor(private route: ActivatedRoute, private apiService: ApiService, private dialog: MatDialog) { }
+  constructor(
+    private route: ActivatedRoute,
+    private apiService: ApiService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     const projectId = Number(this.route.snapshot.paramMap.get('id'));
@@ -35,22 +39,28 @@ export class TasksComponent implements OnInit {
       }, {});
     });
   }
+
   openDialog(): void {
     const dialogRef = this.dialog.open(AddTaskComponent, {
       width: '600px',
-      data: {}
+      data: { projectId: this.project.id }
     });
 
     dialogRef.afterClosed().subscribe(formattedTaskData => {
       if (formattedTaskData) {
         this.apiService.createTask(formattedTaskData).subscribe(
           () => {
+            // Refresh tasks after creating a new task
+            this.apiService.getTasksByProject(this.project.id).subscribe((tasks: any) => {
+              this.tasks = tasks.tasks || [];
+            });
           },
           error => console.error('Error creating task:', error)
         );
       }
     });
   }
+
   getUserName(userId: number): string {
     return this.users[userId] || 'Unknown';
   }

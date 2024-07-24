@@ -11,11 +11,7 @@
     [ngClass]="{ 'active': project.id === selectedProjectId }"
   >
     <h4 (click)="redirectToProjectDetails(project.id)" class="project-name">{{ project.name }}</h4>
-    <p>Description: {{ project.description }}</p>
-    <div class="date-container">
-      <p>{{ project.start_date }} - {{ project.end_date }}</p>
-    </div>
     <p>Owner: {{ project.owner }}</p>
-    <button mat-button (click)="showTasks(project.id)" routerLinkActive="active-link">More</button>
+    <button mat-button (click)="showTasks(project.id)" routerLinkActive="active-link" class="more-button">More</button>
   </div>
 </div>
