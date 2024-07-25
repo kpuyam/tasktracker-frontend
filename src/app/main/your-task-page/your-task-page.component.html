@@ -13,9 +13,16 @@
           <mat-card-title>{{ task.description }}</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <p>Due Date: {{ task.due_date }}</p>
-          <p>Status: {{ task.status }}</p>
+          <div class="task-details">
+            <p class="task-detail-item">Due Date: {{ task.due_date | date:'dd MMM, y' }}</p>
+            <p class="task-detail-item">Status: {{ task.status }}</p>
+          </div>
+          <div class="user-profile">
+            <div class="profile-circle">{{ users[getUserid(task.owner)].charAt(0).toUpperCase() }}</div>
+            <p>{{ users[getUserid(task.owner)] }}</p>
+          </div>
         </mat-card-content>
+
       </mat-card>
     </div>
   </div>
@@ -33,9 +40,16 @@
           <mat-card-title>{{ task.description }}</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <p>Due Date: {{ task.due_date }}</p>
-          <p>Status: {{ task.status }}</p>
+          <div class="task-details">
+            <p class="task-detail-item">Due Date: {{ task.due_date | date:'dd MMM, y' }}</p>
+            <p class="task-detail-item">Status: {{ task.status }}</p>
+          </div>
+          <div class="user-profile">
+            <div class="profile-circle">{{ users[getUserid(task.owner)].charAt(0).toUpperCase() }}</div>
+            <p>{{ users[getUserid(task.owner)] }}</p>
+          </div>
         </mat-card-content>
+
       </mat-card>
     </div>
   </div>
@@ -53,9 +67,16 @@
           <mat-card-title>{{ task.description }}</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <p>Due Date: {{ task.due_date }}</p>
-          <p>Status: {{ task.status }}</p>
+          <div class="task-details">
+            <p class="task-detail-item">Due Date: {{ task.due_date | date:'dd MMM, y' }}</p>
+            <p class="task-detail-item">Status: {{ task.status }}</p>
+          </div>
+          <div class="user-profile">
+            <div class="profile-circle">{{ users[getUserid(task.owner)].charAt(0).toUpperCase() }}</div>
+            <p>{{ users[getUserid(task.owner)] }}</p>
+          </div>
         </mat-card-content>
+
       </mat-card>
     </div>
   </div>
@@ -74,9 +95,16 @@
           <mat-card-title>{{ task.description }}</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <p>Due Date: {{ task.due_date }}</p>
-          <p>Status: {{ task.status }}</p>
+          <div class="task-details">
+            <p class="task-detail-item">Due Date: {{ task.due_date | date:'dd MMM, y' }}</p>
+            <p class="task-detail-item">Status: {{ task.status }}</p>
+          </div>
+          <div class="user-profile">
+            <div class="profile-circle">{{ users[getUserid(task.owner)].charAt(0).toUpperCase() }}</div>
+            <p>{{ users[getUserid(task.owner)] }}</p>
+          </div>
         </mat-card-content>
+
       </mat-card>
     </div>
   </div>

@@ -1,4 +1,3 @@
-<!-- dashboard.component.html -->
 <mat-card class="full-width-card">
   <mat-card-header>
     <mat-card-title>Teammates</mat-card-title>
@@ -14,22 +13,26 @@
 
   <!-- Project Owner Details -->
   <div class="project-owner-card">
-    <h2>Project Owner</h2>
-    <p>{{ projectOwner.first_name }} {{ projectOwner.last_name }} ({{ projectOwner.email }})</p>
+    <div class="user-profile">
+      <div class="profile-circle">{{ projectOwner.first_name.charAt(0) }}</div>
+      <p>{{ projectOwner.first_name }} {{ projectOwner.last_name }} ({{ projectOwner.email }}) : Project Owner</p>
+    </div>
   </div>
 
   <!-- Message when no teammates are assigned to the project -->
   <div *ngIf="teammates === null" class="no-users-message">
-    <h2>Teammates</h2>
-    <p>This project hasn't been assigned to any users yet.</p>
+    <p>This project's task hasn't been assigned to any users yet.</p>
   </div>
 
   <!-- List of teammates when they exist -->
   <div *ngIf="teammates && teammates.length > 0">
-    <h2>Teammates</h2>
+    <h4>Teammates</h4>
     <ul class="teammates-list">
       <li *ngFor="let teammate of teammates" class="teammate-card">
-        {{ teammate.first_name }} {{ teammate.last_name }} ({{ teammate.email }})
+        <div class="user-profile">
+          <div class="profile-circle">{{ teammate.first_name.charAt(0) }}</div>
+          <p>{{ teammate.first_name }} {{ teammate.last_name }} ({{ teammate.email }})</p>
+        </div>
       </li>
     </ul>
   </div>

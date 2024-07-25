@@ -46,6 +46,51 @@
   gap: 20px; /* Add some space between the containers */
   margin: 20px; /* Add margin around the container to avoid sticking to edges */
 }
-.task-column h3{
+
+.task-column h3 {
   text-align: center;
+}
+
+/* Enhanced CSS for task details */
+.task-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Add space between details */
+  margin-bottom: 15px; /* Add margin below the details */
+}
+
+.task-detail-item {
+  margin: 0;
+  color: #333; /* Darker text color for readability */
+}
+
+/* Enhanced existing user profile styles */
+.user-profile {
+  display: flex;
+  align-items: center;
+}
+
+.profile-circle {
+  width: 36px;
+  height: 36px;
+  background-color: #1976d2; /* Azure Blue */
+  color: #fff; /* White text */
+  border-radius: 50%;
+  text-align: center;
+  line-height: 36px;
+  font-size: 1.2em;
+  margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-profile p {
+  margin: 0;
+  line-height: 1.5; /* Adjust line height for better vertical alignment */
+  color: #333; /* Darker text color for readability */
+}
+
+.profile-circle:hover {
+  background-color: #1565c0; /* Darker shade of Azure Blue on hover */
 }

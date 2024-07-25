@@ -4,6 +4,8 @@ mat-card {
   display: flex;
   flex-direction: column;
   margin: 5px;
+  background-color:#00095B; /* Azure Blue background */
+  color: #fff; /* White text */
 }
 
 .teammates-container {
@@ -57,17 +59,35 @@ mat-card {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.teammates-list h2 {
-  color: #0288d1;
-  margin-bottom: 10px;
+.user-profile {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px; /* Adjust margin if needed */
 }
 
-.project-owner-card h2 {
-  color: #f57c00;
+.profile-circle {
+  width: 36px;
+  height: 36px;
+  background-color: #1976d2; /* Azure Blue */
+  color: #fff; /* White text */
+  border-radius: 50%;
+  text-align: center;
+  line-height: 36px;
+  font-size: 1.2em;
+  margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: -2px; /* Adjust this value to move the circle up or down */
 }
 
-.project-owner-card p,
-.teammate-card p {
-  font-size: 1.1em;
-  color: #424242;
+.user-profile p {
+  margin: 0;
+  line-height: 1.5; /* Adjust line height for better vertical alignment */
+}
+
+
+.profile-circle:hover {
+  background-color: #1565c0; /* Darker shade of Azure Blue on hover */
 }

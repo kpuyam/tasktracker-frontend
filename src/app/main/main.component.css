@@ -1,16 +1,4 @@
-.tile-1-2 {
-  background: lightgray; /* Optional: set background color */
-}
-
-.tile-3 {
-  background: lightblue; /* Optional: set background color */
-}
-
-.tile-4 {
-  background: lightgreen; /* Optional: set background color */
-}
-
-.full-width-component {
-  height: 100%;
-  width: 100%;
+.main-container {
+  background-color: #F5F5F5; /* Replace with your desired color */
+  min-height: 100vh; /* Ensure the container fills the viewport height */
 }
