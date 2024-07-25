@@ -24,6 +24,8 @@ export class TasksComponent implements OnInit {
   ngOnInit(): void {
     const projectId = Number(this.route.snapshot.paramMap.get('id'));
 
+    this.checkReadOnlyRole();
+
     this.apiService.getProject(projectId).subscribe((project: any) => {
       this.project = project;
     });
@@ -37,6 +39,17 @@ export class TasksComponent implements OnInit {
         acc[user.id] = user.username;
         return acc;
       }, {});
+    });
+  }
+  checkReadOnlyRole(): void {
+    this.apiService.getUserDetails().subscribe(userDetails => {
+      const userId = userDetails.id;
+      this.apiService.getRole(userId).subscribe((role : any) => {
+        const adminRole = role[0].role;
+        if (adminRole == "read_only") {
+          this.isReadOnly = true;
+        }
+      });
     });
   }
 
