@@ -49,7 +49,7 @@ li {
   font-size: 2em;
   color: #333;
   text-decoration: none;
-  background: linear-gradient(90deg, #ff758c, #ff7eb3);
+  background: linear-gradient(90deg, #00095B, #00095B);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   transition: color 0.3s ease;
@@ -78,7 +78,7 @@ li {
 .card button {
   align-self: flex-end;
   margin-top: 10px;
-  background-color: #1976d2;
+  background-color: #00095B;
   color: white;
   transition: background-color 0.3s ease;
 }
@@ -113,6 +113,7 @@ li {
   margin-left: auto;
   padding: 10px 20px; /* Added padding for larger button */
   font-size: 1.2em; /* Increased font size */
+  color: #00095B;
 }
 
 .filter-field {

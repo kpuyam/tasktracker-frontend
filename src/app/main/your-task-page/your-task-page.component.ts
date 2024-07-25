@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../api.service';
-import { Task } from '../main.models';
+import { Task, User } from '../main.models';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { forkJoin, BehaviorSubject } from 'rxjs';
 
@@ -29,9 +29,10 @@ export class YourTaskPageComponent implements OnInit {
       this.inProgressTasks = tasks.filter(task => task.status === 'in-progress');
       this.completedTasks = tasks.filter(task => task.status === 'completed');
       this.acceptedTasks = tasks.filter(task => task.status === 'accepted');
-
+      console.log("sabari",this.newTasks);
       this.users = users.reduce((acc, user) => {
         acc[user.id] = user.username;
+        console.log(acc);
         return acc;
       }, {});
 
@@ -44,7 +45,10 @@ export class YourTaskPageComponent implements OnInit {
 
     this.fetchTasks();
   }
-
+  getUserid(data:User){
+    console.log("HUI",data);
+    return Number(data);
+  }
   fetchTasks(): void {
     this.apiService.getTasks().subscribe(
       (tasks: Task[]) => {
